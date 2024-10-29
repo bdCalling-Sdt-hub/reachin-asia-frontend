@@ -3,12 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@/assets/images/main/logo.svg';
 import Profile from '@/assets/images/main/profile.png';
-
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
-
 import MobileDrawer from './MobileDrawer';
-import { usePathname } from 'next/navigation';
 import { Button } from 'antd';
 import NavItems from './NavbarItems';
 

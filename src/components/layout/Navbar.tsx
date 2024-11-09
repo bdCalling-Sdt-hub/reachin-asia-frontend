@@ -63,7 +63,7 @@ const Navbar = () => {
                                                         Sign Up
                                                  </Button>
                                           </Link>
-                                          {/* <Link href={'/profile'}>
+                                          <Link href={'/profile'}>
                                                  <div className="flex items-center gap-4">
                                                         <div className="size-[44px] rounded-full ">
                                                                <Image
@@ -76,7 +76,7 @@ const Navbar = () => {
                                                         </div>
                                                         <p className="text-primary">Apu</p>
                                                  </div>
-                                          </Link> */}
+                                          </Link>
                                    </div>
                                    <div className="md:hidden">
                                           <AiOutlineMenu

@@ -30,7 +30,7 @@ const Footer = () => {
                                                  <Link href="/pricing" className="block mb-4">
                                                         Pricing
                                                  </Link>
-                                                 <Link href="/contact-sales" className="block mb-4">
+                                                 <Link href="/contact" className="block mb-4">
                                                         Contact Sales
                                                  </Link>
                                           </div>

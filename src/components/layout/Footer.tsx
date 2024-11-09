@@ -9,7 +9,7 @@ import Logo from '@/assets/images/main/logo.svg';
 const Footer = () => {
        return (
               <footer className=" text-subtitle">
-                     <div className="bg-white py-10">
+                     <div className="bg-white py-20">
                             <div className="container  mx-auto px-4 grid grid-cols-3  w-full justify-center text-center">
                                    {/* Logo and Motto */}
                                    <div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
@@ -19,31 +19,31 @@ const Footer = () => {
                                           </p>
                                    </div>
 
-                                   <div className="flex flex-col justify-center md:flex-row md:space-x-8 text-center md:text-left mt-4 md:mt-0 ">
+                                   <div className="flex flex-col justify-center md:flex-row md:space-x-8  text-center md:text-left mt-4 md:mt-0 ">
                                           <div>
-                                                 <Link href="/blogs" className="block mb-2">
+                                                 <Link href="/blogs" className="block mb-4">
                                                         Blogs
                                                  </Link>
-                                                 <Link href="/about-us" className="block mb-2">
+                                                 <Link href="/about-us" className="block mb-4">
                                                         About Us
                                                  </Link>
-                                                 <Link href="/pricing" className="block mb-2">
+                                                 <Link href="/pricing" className="block mb-4">
                                                         Pricing
                                                  </Link>
-                                                 <Link href="/contact-sales" className="block mb-2">
+                                                 <Link href="/contact-sales" className="block mb-4">
                                                         Contact Sales
                                                  </Link>
                                           </div>
                                    </div>
                                    <div className="flex flex-col justify-center md:flex-row md:space-x-8 text-center md:text-left mt-4 md:mt-0">
                                           <div>
-                                                 <Link href="/terms-of-use" className="block mb-2">
+                                                 <Link href="/terms-of-use" className="block mb-4">
                                                         Terms of Use
                                                  </Link>
-                                                 <Link href="/privacy-policy" className="block mb-2">
+                                                 <Link href="/privacy-policy" className="block mb-4">
                                                         Data & Privacy Policy
                                                  </Link>
-                                                 <Link href="/license-terms" className="block mb-2">
+                                                 <Link href="/license-terms" className="block mb-4">
                                                         License Terms & Conditions
                                                  </Link>
                                           </div>
@@ -52,7 +52,7 @@ const Footer = () => {
                      </div>
 
                      {/* Bottom Bar */}
-                     <div className="bg-primary py-4">
+                     <div className="bg-primary py-6">
                             <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-white text-sm">
                                    <p className="text-center md:text-left mb-2 md:mb-0">All Rights Reserved © Reachin Asia</p>
                                    <div className="flex space-x-4">

@@ -37,13 +37,13 @@ const Footer = () => {
                                    </div>
                                    <div className="flex flex-col justify-center md:flex-row md:space-x-8 text-center md:text-left mt-4 md:mt-0">
                                           <div>
-                                                 <Link href="/terms-of-use" className="block mb-4">
+                                                 <Link href="/terms-and-condition" className="block mb-4">
                                                         Terms of Use
                                                  </Link>
                                                  <Link href="/privacy-policy" className="block mb-4">
                                                         Data & Privacy Policy
                                                  </Link>
-                                                 <Link href="/license-terms" className="block mb-4">
+                                                 <Link href="/licence-terms" className="block mb-4">
                                                         License Terms & Conditions
                                                  </Link>
                                           </div>

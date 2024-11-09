@@ -11,7 +11,14 @@ const NavItems = ({ items, onClose }: { items: any[]; onClose?: () => void }) =>
               children.map((child, childIndex) => ({
                      key: childIndex,
                      label: (
-                            <Link onClick={onClose} className={`${pathname === child.path ? 'font-semibold' : ''}`} href={child.path}>
+                            <Link
+                                   style={{
+                                          color: '#4E4E4E',
+                                   }}
+                                   onClick={onClose}
+                                   className={`${pathname === child.path ? 'font-semibold' : ''}`}
+                                   href={child.path}
+                            >
                                    {child.label}
                             </Link>
                      ),

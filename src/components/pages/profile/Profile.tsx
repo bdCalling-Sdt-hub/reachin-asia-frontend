@@ -27,7 +27,7 @@ const Profile = () => {
                      </div>
                      <div className="grid grid-cols-12 items-start  h-full">
                             <div className="col-span-12 md:col-span-5 w-full order-1 md:order-1 m-auto">
-                                   <div className="max-w-[471px] mx-auto bg-white p-8 shadow-sm">
+                                   <div className="max-w-[471px] mx-auto  md:mx-0 bg-white p-8 shadow-sm">
                                           <Form name="sign_up" initialValues={{ remember: true }} onFinish={onFinish} layout="vertical">
                                                  <div className="space-y-4">
                                                         <h2 className="text-2xl font-semibold  text-start ">Check Details Below</h2>

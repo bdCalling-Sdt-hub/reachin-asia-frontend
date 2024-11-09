@@ -17,6 +17,12 @@ const Providers = ({ children }: { children: ReactNode }) => {
                                                  paddingInline: ' 0px',
                                                  lineWidth: 15,
                                           },
+                                          Form: {
+                                                 marginLG: 16,
+                                          },
+                                          Dropdown: {
+                                                 fontFamily: 'inherit',
+                                          },
                                    },
                             }}
                      >

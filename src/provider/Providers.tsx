@@ -24,6 +24,13 @@ const Providers = ({ children }: { children: ReactNode }) => {
                                           Dropdown: {
                                                  fontFamily: 'inherit',
                                           },
+                                          Table: {
+                                                 fontSize: 14,
+                                                 // borderColor: 'transparent',
+                                                 headerBg: 'white',
+                                                 colorText: '#4E4E4E',
+                                                 headerColor: '#4E4E4E',
+                                          },
                                    },
                             }}
                      >

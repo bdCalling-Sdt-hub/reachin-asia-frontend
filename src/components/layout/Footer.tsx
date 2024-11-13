@@ -24,8 +24,8 @@ const Footer = () => {
                                                  <Link href="/blogs" className="block mb-4">
                                                         Blogs
                                                  </Link>
-                                                 <Link href="/about-us" className="block mb-4">
-                                                        About Us
+                                                 <Link href="/our-story" className="block mb-4">
+                                                        Our Story
                                                  </Link>
                                                  <Link href="/pricing" className="block mb-4">
                                                         Pricing

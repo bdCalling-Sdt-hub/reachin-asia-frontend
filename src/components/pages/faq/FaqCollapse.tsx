@@ -1,7 +1,6 @@
 'use client';
-import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Collapse, Pagination, theme } from 'antd';
-import Title from './shared/Title';
+
 import { BsPlusLg } from 'react-icons/bs';
 
 // FAQ Data Array

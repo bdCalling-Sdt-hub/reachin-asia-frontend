@@ -47,6 +47,7 @@ const HeroSection = () => {
                                    {/* Buttons */}
                                    <div className="flex flex-wrap gap-5 mt-5 md:gap-3 space-x-4 justify-center md:justify-start ">
                                           <Button
+                                                 href="/search"
                                                  shape="round"
                                                  style={{
                                                         height: 40,

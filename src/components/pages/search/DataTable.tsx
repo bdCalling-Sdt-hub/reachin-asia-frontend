@@ -103,7 +103,7 @@ const DataTable: React.FC = () => {
                                      title: '',
                                      key: 'details',
                                      render: () => (
-                                            <Button shape="round" type="primary">
+                                            <Button href={`/details/${1}`} shape="round" type="primary">
                                                    Details
                                             </Button>
                                      ),

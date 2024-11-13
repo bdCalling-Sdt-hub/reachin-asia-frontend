@@ -10,6 +10,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
                                    token: {
                                           colorPrimary: '#2375D0',
                                           fontSize: 16,
+                                          fontFamily: 'inherit',
                                    },
                                    components: {
                                           Button: {

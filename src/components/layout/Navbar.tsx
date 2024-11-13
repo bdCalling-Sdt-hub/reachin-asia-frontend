@@ -20,7 +20,7 @@ const Navbar = () => {
                      children: [
                             { label: 'Our Story', path: '/our-story' },
                             { label: 'Learning', path: '/learnings' },
-                            { label: 'Fags', path: '/faqs' },
+                            { label: 'Faqs', path: '/faqs' },
                      ],
               },
               { label: 'Contact Sales', path: '/contact' },

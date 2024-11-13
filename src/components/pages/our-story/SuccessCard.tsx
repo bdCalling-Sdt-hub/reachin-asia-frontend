@@ -29,6 +29,7 @@ const SuccessCard = () => {
                                           5x <br /> Increase in <br /> Productivity & <br /> 3x increase in demos schedule
                                    </h2>
                                    <Button
+                                          href="/success-story"
                                           shape="round"
                                           style={{
                                                  height: 46,

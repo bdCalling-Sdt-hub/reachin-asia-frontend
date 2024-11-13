@@ -21,7 +21,7 @@ const SetNewPassword = () => {
                                    <Image src={Auth} width={1000} height={1000} className="w-[600px] h-[502px] ms-auto" alt="logo" />
                             </div>
                             <div className="order-1 md:order-2 m-auto">
-                                   <div className="bg-white min-w-[471px] p-8 shadow-sm">
+                                   <div className="bg-white md:min-w-[471px] p-8 shadow-sm">
                                           <Form name="set_new_password" onFinish={onFinish} layout="vertical">
                                                  <h2 className="text-2xl font-semibold text-title text-start mb-2">Set a new password</h2>
                                                  <p className="mb-4">

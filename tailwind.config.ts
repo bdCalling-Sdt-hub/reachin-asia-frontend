@@ -15,7 +15,7 @@ const config: Config = {
                      },
                      container: {
                             center: true,
-                            padding: '0.5rem',
+                            padding: '1rem',
                             screens: {
                                    sm: '640px',
                                    md: '768px',

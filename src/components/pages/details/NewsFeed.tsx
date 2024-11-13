@@ -1,6 +1,7 @@
 // components/NewsFeed.tsx
 
 import NewsImage from '@/assets/images/details/news2.png';
+import { Button } from 'antd';
 import Image from 'next/image';
 const newsItems = [
        { title: 'Alibaba-backed Turkish ecommerce platform launches LLM', date: '21 March, 2024' },
@@ -38,10 +39,18 @@ const NewsFeed: React.FC = () => {
                                    </div>
                             ))}
                      </div>
-                     <div className="flex justify-center mt-4">
-                            <a href="#" className="text-primary font-medium">
+                     <div className="flex justify-end">
+                            <Button
+                                   style={{
+                                          height: 42,
+                                          width: 'fit-content',
+                                          margin: '20px 0',
+                                   }}
+                                   shape="round"
+                                   type="primary"
+                            >
                                    See All News
-                            </a>
+                            </Button>
                      </div>
               </div>
        );

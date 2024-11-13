@@ -7,11 +7,11 @@ import FaqCollapse from './FaqCollapse';
 
 const Faqs = () => {
        return (
-              <div>
+              <div className="my-20 md:my-2">
                      <section className="container min-h-[416px]">
                             <div className="grid lg:grid-cols-2 gap-12 items-center">
                                    <div className="space-y-6 max-w-xl">
-                                          <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight">
+                                          <h1 className="text-4xl text-center md:text-start md:text-5xl lg:text-5xl font-bold tracking-tight">
                                                  To Refine Your Business
                                                  <br />
                                                  For <span className="text-primary">Growth</span>

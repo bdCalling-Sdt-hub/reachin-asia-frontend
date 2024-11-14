@@ -7,7 +7,7 @@ import { useState } from 'react';
 type FilterType = 'peoples' | 'companies' | null;
 
 const DataTable: React.FC = () => {
-       const [activeFilter, setActiveFilter] = useState<FilterType>(null);
+       const [activeFilter, setActiveFilter] = useState<FilterType>('peoples');
 
        const handleFilterClick = (filter: FilterType) => {
               setActiveFilter(filter === activeFilter ? null : filter);
@@ -132,13 +132,13 @@ const DataTable: React.FC = () => {
 
        return (
               <div>
-                     <div className="flex items-center gap-3 py-3">
+                     <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 py-3">
                             {/* People Filter Button */}
                             <button
                                    onClick={() => handleFilterClick('peoples')}
                                    className={`${
                                           activeFilter === 'peoples' ? 'bg-primary text-white' : 'bg-[#F3F3F3] text-[#999999]'
-                                   } w-fit px-4 py-3 rounded-full text-sm font-medium`}
+                                   } w-full sm:w-fit px-4 py-3 rounded-full text-sm font-medium`}
                             >
                                    Peoples: 56,00
                             </button>
@@ -148,21 +148,23 @@ const DataTable: React.FC = () => {
                                    onClick={() => handleFilterClick('companies')}
                                    className={`${
                                           activeFilter === 'companies' ? 'bg-primary text-white' : 'bg-[#F3F3F3] text-[#999999]'
-                                   } w-fit px-4 py-3 rounded-full text-sm font-medium`}
+                                   } w-full sm:w-fit px-4 py-3 rounded-full text-sm font-medium`}
                             >
                                    Companies: 800
                             </button>
                      </div>
 
                      {/* Dynamic Table */}
-                     <Table columns={columns} dataSource={data} pagination={false} />
+                     <Table scroll={{ x: 600 }} columns={columns} dataSource={data} pagination={false} />
 
                      <div className="flex justify-center items-center my-4">
                             <Pagination
                                    defaultCurrent={1}
-                                   total={500}
+                                   total={10}
                                    pageSize={10} // Number of items per page
                                    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+                                   className="w-full sm:w-auto text-xs sm:text-sm"
+                                   responsive
                             />
                      </div>
               </div>

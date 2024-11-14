@@ -82,7 +82,7 @@ const Learnings = () => {
        return (
               <div className="my-20 container">
                      <div className=" flex flex-col items-center text-center relative h-[230px] my-14">
-                            <div className="flex items-center gap-10">
+                            <div className=" flex-col md:flex-row items-center gap-10">
                                    <h1 className="text-5xl text-nowrap my-auto font-semibold">
                                           Our Latest <span className="text-primary">Blog</span>
                                    </h1>
@@ -108,7 +108,7 @@ const Learnings = () => {
                                    </div>
                             ))}
                      </div>
-                     <div className="flex justify-between my-8">
+                     <div className=" flex flex-col md:flex-row justify-between my-8">
                             {postsData.map((post) => (
                                    <div key={post.id} className="p-4 max-w-[450px]">
                                           <p className="text-primary text-lg mb-2">{post.readTime}</p>
@@ -121,7 +121,7 @@ const Learnings = () => {
                                    </div>
                             ))}
                      </div>
-                     <div className="flex gap-4 my-8">
+                     <div className="flex flex-col md:flex-row gap-4 my-8">
                             {postsData2.map((post) => (
                                    <div key={post.id} className="p-4  bg-[#E9E9E9]">
                                           <div className="flex items-center justify-between">
@@ -137,7 +137,7 @@ const Learnings = () => {
                                    </div>
                             ))}
                      </div>
-                     <div className="flex items-center gap-4 mt-20">
+                     <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 mt-20">
                             {categories.map((item, index) => (
                                    <div
                                           key={index}
@@ -152,7 +152,7 @@ const Learnings = () => {
                                    </div>
                             ))}
                      </div>
-                     <div className="grid grid-cols-3 items-center gap-4 my-10 h-full">
+                     <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4 my-10 h-full">
                             {[1, 2, 3, 4, 5].map((item, index) => (
                                    <div key={index} className="w-full h-full  text-white rounded-xl">
                                           <article className="space-y-4">

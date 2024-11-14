@@ -4,7 +4,7 @@ import React from 'react';
 import OurStoryImage from '@/assets/images/our-story/hero.svg';
 const OurStoryHeader = () => {
        return (
-              <div className="grid container my-20 grid-cols-1 md:grid-cols-2">
+              <div className="grid items-center container my-20 grid-cols-1 md:grid-cols-2">
                      <div className="space-y-5 max-w-[490px]">
                             <h1 className="text-4xl font-semibold">
                                    Our <span className="text-primary">Story</span>

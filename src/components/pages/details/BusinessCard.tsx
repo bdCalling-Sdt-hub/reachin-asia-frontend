@@ -21,7 +21,7 @@ const BusinessCard: React.FC = () => {
                      <div className="grid grid-cols-12 ">
                             <div className="col-span-12 md:col-span-5 ">
                                    {/* Logo */}
-                                   <div className="flex items-center gap-4 text-subtitle h-full">
+                                   <div className="flex flex-col md:flex-row items-center gap-4 text-subtitle h-full">
                                           <Image src={Logo} alt="Company Logo" className="w-32 h-auto" />
 
                                           {/* Personal Information */}
@@ -38,7 +38,7 @@ const BusinessCard: React.FC = () => {
                                    </div>
                             </div>
 
-                            <div className="col-span-12 md:col-span-7 grid grid-cols-1 md:grid-cols-3">
+                            <div className="col-span-12 md:col-span-7 grid grid-cols-1 md:grid-cols-3 my-4 justify-center text-center md:text-start">
                                    {/* Company Information */}
                                    <div className=" space-y-5">
                                           <div>
@@ -51,7 +51,7 @@ const BusinessCard: React.FC = () => {
                                                  <p className="font-semibold text-[#4E4E4E]">www.alibaba.com</p>
                                           </div>
                                           {/* Social Media Icons */}
-                                          <div className="flex gap-4 mt-4 text-xl text-[#999999]">
+                                          <div className="flex gap-4 justify-center md:justify-start mt-4 text-xl text-[#999999]">
                                                  {socialMediaData.map((item, index) => (
                                                         <a
                                                                key={index}

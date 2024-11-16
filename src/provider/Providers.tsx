@@ -1,8 +1,11 @@
+// import ReduxProvider from '@/redux/lib/ReduxProviders';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from 'antd';
+import dynamic from 'next/dynamic';
 import React, { ReactNode } from 'react';
 
 const Providers = ({ children }: { children: ReactNode }) => {
+       const ReduxProviders = dynamic(() => import('@/redux/lib/ReduxProviders'), { ssr: false });
        return (
               <AntdRegistry>
                      <ConfigProvider
@@ -34,7 +37,9 @@ const Providers = ({ children }: { children: ReactNode }) => {
                                    },
                             }}
                      >
-                            <div className="bg-[#F8F9FD]">{children}</div>
+                            <ReduxProviders>
+                                   <div className="bg-[#F8F9FD]">{children}</div>
+                            </ReduxProviders>
                      </ConfigProvider>
               </AntdRegistry>
        );

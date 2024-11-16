@@ -1,12 +1,40 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import React, { use } from 'react';
 import Auth from '@/assets/images/auth/auth.svg';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, message, notification } from 'antd';
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
+import Link from 'next/link';
+import { useLoginUserMutation } from '@/redux/features/auth/authApi';
+import { useAppDispatch } from '@/redux/hooks';
+import { decodedUser } from '@/utils/decodedUser';
+import { setUser } from '@/redux/features/auth/authSlice';
+import { useRouter } from 'next/navigation';
 const LoginPage = () => {
-      const onFinish = (values: FormData) => {
-            console.log('Success:', values);
+      const router = useRouter();
+      const [loginUser] = useLoginUserMutation();
+      const dispatch = useAppDispatch();
+      const onFinish = async (values: FormData) => {
+            try {
+                  const res = await loginUser(values).unwrap();
+                  if (res.success) {
+                        notification.success({
+                              message: res.message,
+                        });
+                        const user = decodedUser(res.data.accessToken);
+                        dispatch(
+                              setUser({
+                                    user,
+                                    token: res.data.accessToken,
+                              })
+                        );
+                        router.push('/');
+                  }
+            } catch (error: any) {
+                  notification.error({
+                        message: error?.data?.message || 'Something went wrong. Please try again.',
+                  });
+            }
       };
       return (
             <div>
@@ -67,7 +95,7 @@ const LoginPage = () => {
                                                       >
                                                             Remember Password
                                                       </Checkbox>
-                                                      <a href="/forgot-password" className="text-[#54A7C3]">
+                                                      <a href="/forgot-password" className="text-primary hover:text-primary">
                                                             Forgot Password?
                                                       </a>
                                                 </div>
@@ -82,9 +110,9 @@ const LoginPage = () => {
                                           <div className="text-center mt-4">
                                                 <p className="flex items-center gap-2">
                                                       <span> don&apos;t have an account?</span>
-                                                      <a href="/register" className="text-primary">
+                                                      <Link href="/register" className="text-primary hover:text-primary">
                                                             Sign Up
-                                                      </a>
+                                                      </Link>
                                                 </p>
                                           </div>
                                     </Form>

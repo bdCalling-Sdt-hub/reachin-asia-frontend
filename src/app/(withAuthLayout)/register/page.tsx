@@ -15,11 +15,13 @@ import {
       PhoneOutlined,
 } from '@ant-design/icons';
 import { useCreateUserMutation } from '@/redux/features/user/userApi';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage = () => {
+      const router = useRouter();
       const [form] = Form.useForm();
       const [registerUser] = useCreateUserMutation();
-      const onFinish = async (values: FormData) => {
+      const onFinish = async (values: any) => {
             try {
                   const res = await registerUser(values).unwrap();
                   if (res.success) {
@@ -28,6 +30,9 @@ const RegisterPage = () => {
                               description: 'Your account has been created successfully!',
                               duration: 3,
                         });
+                        router.push('/verify-otp?purpose=register');
+
+                        localStorage.setItem('email', values.email);
                   }
             } catch (error: any) {
                   notification.error({

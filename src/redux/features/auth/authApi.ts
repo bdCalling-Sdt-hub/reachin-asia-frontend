@@ -23,7 +23,7 @@ const authApi = baseApi.injectEndpoints({
             forgetPassword: build.mutation({
                   query: (data) => {
                         return {
-                              url: '/auth/forget-password',
+                              url: '/auth/forgot-password',
                               method: 'POST',
                               body: data,
                         };
@@ -37,7 +37,7 @@ const authApi = baseApi.injectEndpoints({
                               body: data,
                               headers: {
                                     'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${localStorage.getItem('oneTimeToken')}`,
+                                    Authorization: `${localStorage.getItem('oneTimeToken')}`,
                               },
                         };
                   },

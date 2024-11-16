@@ -39,7 +39,7 @@ const NavItems = ({ items, onClose }: { items: any[]; onClose?: () => void }) =>
                                                         <Space>
                                                                <span
                                                                       className={`leading-4 ${
-                                                                             pathname === item.path ? 'text-primary' : 'text-black'
+                                                                             pathname === item.path ? 'text-primary' : 'text-[#4E4E4E]'
                                                                       }`}
                                                                >
                                                                       {item.label}
@@ -52,7 +52,7 @@ const NavItems = ({ items, onClose }: { items: any[]; onClose?: () => void }) =>
                                           <Link
                                                  onClick={onClose}
                                                  className={`text-text-primary leading-4 ${
-                                                        pathname === item.path ? 'text-primary' : 'text-black'
+                                                        pathname === item.path ? 'text-primary' : 'text-[#4E4E4E]'
                                                  }`}
                                                  href={item.path}
                                           >

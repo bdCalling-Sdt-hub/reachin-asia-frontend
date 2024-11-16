@@ -172,7 +172,7 @@ const Learnings = () => {
                                                         Ipsum commodo Sed sed libero, leo. lorem. sollicitudin. Ut est. Lorem facilisis
                                                         convallis. Ut non. non. vitae faucibus placerat eu vitae lacus ex sapien risus
                                                         malesuada Praesent tincidunt.{' '}
-                                                        <Link href="#" className="text-primary hover:underline">
+                                                        <Link href={`/learnings/${index + 1}`} className="text-primary hover:underline">
                                                                Read more {'>>'}
                                                         </Link>
                                                  </p>

@@ -34,6 +34,12 @@ const contentApi = baseApi.injectEndpoints({
                         return { blogs: response.data.blogs, meta: response.data.meta };
                   },
             }),
+            getSingleBlog: build.query({
+                  query: (id) => ({ url: `/blog/${id}`, method: 'GET' }),
+                  transformResponse: (response: TApiResponse<TBlog>) => {
+                        return response.data;
+                  },
+            }),
             getFilteredBlogs: build.query({
                   query: (args) => {
                         const params = new URLSearchParams();
@@ -78,4 +84,5 @@ export const {
       useGetPrivacyQuery,
       useGetStoriesQuery,
       useGetFilteredBlogsQuery,
+      useGetSingleBlogQuery,
 } = contentApi;

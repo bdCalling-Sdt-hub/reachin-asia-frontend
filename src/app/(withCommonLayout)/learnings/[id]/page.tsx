@@ -1,11 +1,11 @@
 import BlogDetails from '@/components/pages/learnings/BlogDetails';
 
-const BlogDetailsPage = () => {
-       return (
-              <div>
-                     <BlogDetails />
-              </div>
-       );
+const BlogDetailsPage = ({ params }: { params: { id: string } }) => {
+      return (
+            <div>
+                  <BlogDetails id={params.id} />
+            </div>
+      );
 };
 
 export default BlogDetailsPage;

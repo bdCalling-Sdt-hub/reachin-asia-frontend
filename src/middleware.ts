@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-      // console.log('Middleware running');
+      console.log('Middleware running');
 
-      const token = cookies().get('accessToken')?.value;
-      // console.log('Token:', token);
+      const token = cookies().get('nextAccessToken')?.value;
+      console.log('Token:', token);
 
       if (!token) {
             console.log('No token found, redirecting...');
@@ -17,5 +17,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-      matcher: ['/profile/:path*', '/pricing/:path*'],
+      matcher: ['/profile/:path*'],
 };

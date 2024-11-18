@@ -1,19 +1,19 @@
+import { baseApi } from '@/redux/base/baseApi';
+import authReducer from '@/redux/features/auth/authSlice';
+import categoryFilterReducer from '@/redux/features/categoryFilter/categoryFilterSlice';
 
-import { baseApi } from "@/redux/base/baseApi";
-import authReducer from "@/redux/features/auth/authSlice";
-
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const persistAuthConfig = {
-  key: "auth",
-  storage,
+      key: 'auth',
+      storage,
 };
 
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 
 export const baseReducer = {
-  [baseApi.reducerPath]: baseApi.reducer,
-  auth: persistedAuthReducer,
+      [baseApi.reducerPath]: baseApi.reducer,
+      auth: persistedAuthReducer,
+      categoryFilter: categoryFilterReducer,
 };
-            

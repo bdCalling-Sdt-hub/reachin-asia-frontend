@@ -10,6 +10,7 @@ import { Button, Dropdown } from 'antd';
 import NavItems from './NavbarItems';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { logoutUser } from '@/redux/features/auth/authSlice';
+import { removeAccessToken } from '@/utils/authUtils';
 
 const Navbar = () => {
       const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const Navbar = () => {
 
       const handleMenuClick = () => {
             dispatch(logoutUser());
+            removeAccessToken()
       };
       return (
             <header className={`container  text-subtitle h-[80px] `}>

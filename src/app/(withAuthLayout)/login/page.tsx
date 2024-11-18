@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import React, { use } from 'react';
 import Auth from '@/assets/images/auth/auth.svg';
 import { Button, Checkbox, Form, Input, message, notification } from 'antd';
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
@@ -10,6 +9,8 @@ import { useAppDispatch } from '@/redux/hooks';
 import { decodedUser } from '@/utils/decodedUser';
 import { setUser } from '@/redux/features/auth/authSlice';
 import { useRouter } from 'next/navigation';
+import { setAccessToken } from '@/utils/authUtils';
+
 const LoginPage = () => {
       const router = useRouter();
       const [loginUser] = useLoginUserMutation();
@@ -22,6 +23,7 @@ const LoginPage = () => {
                               message: res.message,
                         });
                         const user = decodedUser(res.data.accessToken);
+                        setAccessToken(res.data.accessToken);
                         dispatch(
                               setUser({
                                     user,

@@ -11,11 +11,13 @@ import NavItems from './NavbarItems';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { logoutUser } from '@/redux/features/auth/authSlice';
 import { removeAccessToken } from '@/utils/authUtils';
+import { useGetProfileQuery } from '@/redux/features/user/userApi';
 
 const Navbar = () => {
       const dispatch = useAppDispatch();
       const [showDrawer, setShowDrawer] = useState(false);
       const { user } = useAppSelector((state) => state.auth);
+      const { data: profile } = useGetProfileQuery(undefined, { skip: !user });
       const items = [
             { label: 'Home', path: '/' },
             { label: 'Pricing', path: '/pricing' },
@@ -33,7 +35,7 @@ const Navbar = () => {
 
       const handleMenuClick = () => {
             dispatch(logoutUser());
-            removeAccessToken()
+            removeAccessToken();
       };
       return (
             <header className={`container  text-subtitle h-[80px] `}>
@@ -88,7 +90,7 @@ const Navbar = () => {
                                                                   className="object-cover"
                                                             />
                                                       </div>
-                                                      <p className="text-primary">Apu</p>
+                                                      <p className="text-primary">{profile?.name}</p>
                                                 </div>
                                           </Dropdown>
                                     ) : (

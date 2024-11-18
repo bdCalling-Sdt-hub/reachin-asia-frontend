@@ -3,21 +3,12 @@ import Image from 'next/image';
 import React from 'react';
 import ProfileBannerImage from '@/assets/images/home/profile.svg';
 import { Button, Form, Input, notification } from 'antd';
-import {
-      MailOutlined,
-      LockOutlined,
-      EyeTwoTone,
-      EyeInvisibleOutlined,
-      LinkOutlined,
-      GlobalOutlined,
-      LinkedinOutlined,
-      UserOutlined,
-      PhoneOutlined,
-} from '@ant-design/icons';
+import { MailOutlined, LinkOutlined, GlobalOutlined, LinkedinOutlined, UserOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/redux/features/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
 import Loader from '@/components/ui/shared/Loader';
 import { createFormDataFromValues } from '@/utils/formDataConverter';
+import ProfileCredit from './ProfileCredit';
 // import MyCredit from '../pricing/MyCredit';
 
 const Profile = () => {
@@ -154,34 +145,9 @@ const Profile = () => {
                                                 </Button>
                                           </Form.Item>
                                     </Form>
-                                    <h1 className="text-lg mb-4 font-semibold">Credits</h1>
-                                    <div className="bg-[#E9F1FA] p-4">
-                                          <div className="space-y-6">
-                                                <div className="space-y-1">
-                                                      <h2 className="text-title font-medium ">Monthly Credit Usage</h2>
-                                                      <p className="text-2xl ">
-                                                            <span className="text-primary">0</span>
-                                                            <span className="text-primary">/1000</span>
-                                                      </p>
-                                                </div>
 
-                                                <div className="grid grid-cols-3 gap-4 border-t-2 border-[#999999] py-4">
-                                                      <div className="space-y-1">
-                                                            <p className="text-title ">Used</p>
-                                                            <p className="text-xl  text-primary">0</p>
-                                                      </div>
-
-                                                      <div className="space-y-1">
-                                                            <p className="text-title ">Remaining</p>
-                                                            <p className="text-xl  text-primary">1000</p>
-                                                      </div>
-
-                                                      <div className="space-y-1">
-                                                            <p className="text-title ">Total</p>
-                                                            <p className="text-xl  text-primary">1000</p>
-                                                      </div>
-                                                </div>
-                                          </div>
+                                    <div>
+                                          <ProfileCredit />
                                     </div>
                               </div>
                         </div>

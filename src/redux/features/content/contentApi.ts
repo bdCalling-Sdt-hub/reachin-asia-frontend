@@ -67,7 +67,7 @@ const contentApi = baseApi.injectEndpoints({
                   transformResponse: (response: TApiResponse<TPrivacyPolicy>) => response.data,
             }),
             getPrivacy: build.query({
-                  query: () => ({ url: '/privacy', method: 'GET' }),
+                  query: () => ({ url: '/rule/privacy-policy', method: 'GET' }),
                   transformResponse: (response: TApiResponse<TPrivacyPolicy>) => response.data,
             }),
             getStories: build.query({

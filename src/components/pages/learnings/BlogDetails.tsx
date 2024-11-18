@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
-import BlogImage from '@/assets/images/learnings/blog.png';
+// import BlogImage from '@/assets/images/learnings/blog.png';
 import { useGetSingleBlogQuery } from '@/redux/features/content/contentApi';
 import { imageUrl } from '@/redux/base/baseApi';
 const BlogDetails = ({ id }: { id: string }) => {

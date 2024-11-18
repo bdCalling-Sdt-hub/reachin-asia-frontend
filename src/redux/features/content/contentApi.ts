@@ -1,5 +1,5 @@
 import { baseApi } from '@/redux/base/baseApi';
-import { TApiResponse } from '@/types';
+import { TApiResponse, TQueryParams } from '@/types';
 export interface TBlog {
       _id: string;
       subject: string;
@@ -7,6 +7,7 @@ export interface TBlog {
       category: string;
       url: string;
       details: string;
+      createdAt: string;
 }
 export interface TFaq {
       _id: string;
@@ -28,8 +29,28 @@ export interface TPrivacyPolicy {
 const contentApi = baseApi.injectEndpoints({
       endpoints: (build) => ({
             getBlogs: build.query({
-                  query: () => ({ url: '/blogs', method: 'GET' }),
-                  transformResponse: (response: TApiResponse<TBlog[]>) => response.data,
+                  query: () => ({ url: '/blog', method: 'GET' }),
+                  transformResponse: (response: any) => {
+                        return { blogs: response.data.blogs, meta: response.data.meta };
+                  },
+            }),
+            getFilteredBlogs: build.query({
+                  query: (args) => {
+                        const params = new URLSearchParams();
+                        if (args) {
+                              args.forEach((arg: TQueryParams) => {
+                                    params.append(arg.name, arg.value as string);
+                              });
+                        }
+                        return {
+                              url: '/blog',
+                              method: 'GET',
+                              params,
+                        };
+                  },
+                  transformResponse: (response: any) => {
+                        return { blogs: response.data.blogs, meta: response.data.meta };
+                  },
             }),
             getFaqs: build.query({
                   query: () => ({ url: '/faqs', method: 'GET' }),
@@ -50,4 +71,11 @@ const contentApi = baseApi.injectEndpoints({
       }),
 });
 
-export const { useGetBlogsQuery, useGetFaqsQuery, useGetTermsQuery, useGetPrivacyQuery, useGetStoriesQuery } = contentApi;
+export const {
+      useGetBlogsQuery,
+      useGetFaqsQuery,
+      useGetTermsQuery,
+      useGetPrivacyQuery,
+      useGetStoriesQuery,
+      useGetFilteredBlogsQuery,
+} = contentApi;

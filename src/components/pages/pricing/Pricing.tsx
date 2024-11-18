@@ -1,106 +1,90 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, ConfigProvider, Switch } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Button, ConfigProvider, message, Switch } from 'antd';
+import MyCredit from './MyCredit';
+import { TPackage, useGetPackagesQuery } from '@/redux/features/packages/packagesApi';
 import { useAppSelector } from '@/redux/hooks';
+import { useRouter } from 'next/navigation';
+import { useGetProfileQuery } from '@/redux/features/user/userApi';
 
 const Pricing = () => {
+      const router = useRouter();
       const { user } = useAppSelector((state) => state.auth);
-      const [isAnnual, setIsAnnual] = useState(false);
+      const { data: myProfile } = useGetProfileQuery(undefined, { skip: !user });
 
-      // Pricing plans data
-      const plans = [
-            { name: 'Trial Plan', price: 50, credits: 10, details: '(First 6 months at USD 25) Payment in advance' },
-            { name: 'Standard Plan', price: 50, credits: 10 },
-            { name: 'Plus Plan', price: 135, credits: 10 },
-            { name: 'Premium Plan', price: 200, credits: 10 },
-            { name: 'Enterprise Plan', price: 350, credits: 10 },
-      ];
+      const [priceType, setPriceType] = useState<'Monthly' | 'Yearly'>('Monthly');
 
-      //    // Dropdown menu for user selection
-      //    const userMenu = (
-      //           <Menu>
-      //                  <Menu.Item key="1">1 User</Menu.Item>
-      //                  <Menu.Item key="5">5 Users</Menu.Item>
-      //                  <Menu.Item key="10">10 Users</Menu.Item>
-      //           </Menu>
-      //    );
+      const { data: packages } = useGetPackagesQuery([{ name: 'paymentType', value: priceType }]);
+      const handleSwitch = () => {
+            setPriceType(priceType === 'Monthly' ? 'Yearly' : 'Monthly');
+      };
+
+      const handleBuyNow = (paymentLink: string) => {
+            if (!user) {
+                  message.warning('Please log in to make a purchase.');
+                  router.push('/login');
+            } else {
+                  router.push(`${paymentLink}?prefilled_email=${user?.email}`);
+            }
+      };
 
       return (
             <div className="bg-[#F8F9FD] min-h-screen">
                   <div className="container py-10">
-                        {/* Credit Usage Section */}
-                        {user && (
-                              <div>
-                                    <h3 className="text-lg font-semibold text-start mb-4">Credits</h3>
-                                    <div className="bg-[#E9F1FA] p-6  w-full mx-auto mb-3">
-                                          <div className="flex justify-around font-medium text-subtitle text-lg">
-                                                <div className="text-center space-y-3">
-                                                      <p>Monthly Credit Usage</p>
-                                                      <p className="text-primary font-semibold">999/1000</p>
-                                                </div>
-                                                <div className="text-center space-y-3">
-                                                      <p>Used</p>
-                                                      <p className="text-primary font-semibold">999</p>
-                                                </div>
-                                                <div className="text-center space-y-3">
-                                                      <p>Remaining</p>
-                                                      <p className="text-primary font-semibold">1</p>
-                                                </div>
-                                                <div className="text-center space-y-3">
-                                                      <p>Total</p>
-                                                      <p className="text-primary font-semibold">5000</p>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
-                        )}
+                        <MyCredit />
 
                         {/* Pricing Plans Header with Toggle */}
                         <div className="text-center mb-12 mt-5">
                               <br />
-                              <h2 className="text-4xl font-semibold  max-w-[25ch] mx-auto ">
+                              <h2 className="text-4xl font-semibold max-w-[25ch] mx-auto">
                                     Choose <span className="text-primary">Pricing Plans</span> Which Suits Your Needs.
                               </h2>
                               <br />
 
                               <div className="flex items-center justify-center space-x-5">
-                                    <span className={`font-medium text-xl ${!isAnnual ? 'text-primary' : ''}`}>Monthly</span>
+                                    <span className={`font-medium text-xl ${priceType === 'Monthly' ? 'text-primary' : ''}`}>
+                                          Monthly
+                                    </span>
 
                                     <ConfigProvider
                                           theme={{
                                                 components: {
                                                       Switch: {
-                                                            handleSize: 32, // Adjust the handle size
+                                                            handleSize: 32,
                                                             innerMinMargin: 50,
                                                       },
                                                 },
                                           }}
                                     >
-                                          <Switch checked={isAnnual} onChange={() => setIsAnnual(!isAnnual)} />
+                                          <Switch checked={priceType === 'Yearly'} onChange={handleSwitch} />
                                     </ConfigProvider>
 
-                                    <span className={`font-medium text-xl ${isAnnual ? 'text-primary' : ''}`}>Annually</span>
+                                    <span className={`font-medium text-xl ${priceType === 'Yearly' ? 'text-primary' : ''}`}>
+                                          Annually
+                                    </span>
                               </div>
                         </div>
 
                         {/* Pricing Plan Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-5 overflow-x-auto mx-auto border-[13px] border-primary rounded-xl">
-                              {plans.map((plan, index) => (
+                              {packages?.map((plan: TPackage) => (
                                     <div
-                                          key={index}
+                                          key={plan?._id}
                                           className="p-6 text-center border space-y-4 border-gray-200 flex flex-col justify-between h-full"
                                     >
                                           <div>
-                                                <h3 className="text-xl font-semibold mb-3">{plan.name}</h3>
+                                                <h3 className="text-xl font-semibold mb-3">{plan?.title}</h3>
                                                 <p className="text-2xl text-subtitle mb-1">
-                                                      {isAnnual ? (plan.price * 12 * 0.9).toFixed(0) : plan.price} USD{' '}
-                                                      <span className="text-sm font-normal">mo/user</span>
+                                                      {plan.price}
+                                                      <span className="text-sm font-normal">/ {plan?.duration}</span>
                                                 </p>
-                                                {plan.details && <p className="text-lg text-subtitle mb-3">{plan.details}</p>}
-                                                <p className="text-lg mb-6 text-subtitle">{plan.credits} Credits/month</p>
+                                                {plan.description && (
+                                                      <p className="text-lg text-subtitle mb-3">{plan?.description}</p>
+                                                )}
+                                                <p className="text-lg mb-6 text-subtitle">{plan?.credit} Credits/month</p>
                                           </div>
                                           <Button
+                                                onClick={() => handleBuyNow(plan?.paymentLink)}
                                                 style={{
                                                       width: '100%',
                                                 }}
@@ -109,7 +93,7 @@ const Pricing = () => {
                                                 className="w-full"
                                                 size="large"
                                           >
-                                                Buy Now
+                                                {myProfile?.isSubscribed ? 'Upgrade' : ' Buy Now'}
                                           </Button>
                                     </div>
                               ))}

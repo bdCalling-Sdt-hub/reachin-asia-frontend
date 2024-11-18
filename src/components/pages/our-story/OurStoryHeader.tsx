@@ -1,8 +1,11 @@
+'use client';
 import { Button } from 'antd';
 import Image from 'next/image';
 import React from 'react';
 import OurStoryImage from '@/assets/images/our-story/hero.svg';
+import { useAppSelector } from '@/redux/hooks';
 const OurStoryHeader = () => {
+      const { user } = useAppSelector((state) => state.auth);
       return (
             <div className="grid items-center container my-20 grid-cols-1 md:grid-cols-2">
                   <div className="space-y-5 max-w-[490px]">
@@ -23,7 +26,7 @@ const OurStoryHeader = () => {
                                     height: 46,
                               }}
                         >
-                              Read More
+                              Sign Up
                         </Button>
                   </div>
                   <div>

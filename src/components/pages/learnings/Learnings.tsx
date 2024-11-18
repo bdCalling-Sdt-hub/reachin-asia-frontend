@@ -64,13 +64,16 @@ const Learnings = () => {
                               <div key={blog._id} className="p-4 max-w-[450px]">
                                     <p className="text-primary text-lg mb-2"> {moment(blog.createdAt).fromNow()}</p>
 
-                                    <p className="text-4xl mb-4 font-semibold">{blog.subject}</p>
+                                    <p className="text-2xl md:text-4xl mb-4 font-semibold">{blog.subject}</p>
                                     <div className="flex items-center space-x-2 mt-auto bg-[#F6F6F6] w-fit py-2 px-4 rounded-full">
                                           <Image src={Profile} alt="Author avatar" className="size-[40px] rounded-full" />
                                           <span className="text-primary">Post by Admin</span>
                                     </div>
                               </div>
                         ))}
+                  </div>
+                  <div>
+                        <h1 className="text-3xl text-nowrap my-auto font-semibold">Trending</h1>
                   </div>
                   <div className="flex flex-col md:flex-row gap-4 my-8">
                         {blogData?.blogs.slice(0, 4).map((post: TBlog) => (

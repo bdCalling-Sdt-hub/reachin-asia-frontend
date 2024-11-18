@@ -53,7 +53,7 @@ const contentApi = baseApi.injectEndpoints({
                   },
             }),
             getFaqs: build.query({
-                  query: () => ({ url: '/faqs', method: 'GET' }),
+                  query: () => ({ url: '/faq', method: 'GET' }),
                   transformResponse: (response: TApiResponse<TFaq[]>) => response.data,
             }),
             getTerms: build.query({

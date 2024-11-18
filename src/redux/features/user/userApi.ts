@@ -37,8 +37,19 @@ const userApi = baseApi.injectEndpoints({
                         };
                   },
                   transformResponse: (response: TApiResponse<TUser>) => response.data,
+                  providesTags: ['User'],
+            }),
+            updateProfile: build.mutation({
+                  query: (data) => {
+                        return {
+                              url: '/user',
+                              method: 'PATCH',
+                              body: data,
+                        };
+                  },
+                  invalidatesTags: ['User'],
             }),
       }),
 });
 
-export const { useCreateUserMutation, useGetProfileQuery } = userApi;
+export const { useCreateUserMutation, useGetProfileQuery, useUpdateProfileMutation } = userApi;

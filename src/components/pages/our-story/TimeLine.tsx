@@ -57,7 +57,7 @@ const Timeline = () => {
                                                             <p className="text-subtitle my-2">{story.answer}</p>
                                                             <Link
                                                                   className="text-primary flex items-center gap-2"
-                                                                  href="/success-story"
+                                                                  href={`/our-story/${story._id}`}
                                                             >
                                                                   Read More <HiChevronDoubleRight />
                                                             </Link>

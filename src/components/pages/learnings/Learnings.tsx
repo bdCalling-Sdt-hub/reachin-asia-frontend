@@ -145,7 +145,7 @@ const Learnings = () => {
                                     </article>
                               </div>
                         ))}
-                        <div className="bg-[#206ABD] p-8">
+                        <div className="bgGredient p-8">
                               <div className="w-32">
                                     <Image src={Logo} alt="Reach in" width={128} height={40} className="w-[140px]" />
                               </div>

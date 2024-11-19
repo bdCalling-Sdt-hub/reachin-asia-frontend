@@ -84,6 +84,10 @@ const contentApi = baseApi.injectEndpoints({
                   query: () => ({ url: '/story', method: 'GET' }),
                   transformResponse: (response: TApiResponse<any>) => response.data?.story,
             }),
+            getSingleStory: build.query({
+                  query: (id) => ({ url: `/story/${id}`, method: 'GET' }),
+                  transformResponse: (response: TApiResponse<any>) => response.data,
+            }),
       }),
 });
 
@@ -95,4 +99,5 @@ export const {
       useGetStoriesQuery,
       useGetFilteredBlogsQuery,
       useGetSingleBlogQuery,
+      useGetSingleStoryQuery,
 } = contentApi;

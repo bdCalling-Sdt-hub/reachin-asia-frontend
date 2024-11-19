@@ -13,9 +13,10 @@ const OurStoryHeader = () => {
                               Our <span className="text-primary">Story</span>
                         </h1>
                         <p className="text-subtitle">
-                              Ipsum commodo Sed sed libero, leo. lorem. sollicitudin. Ut est. Lorem facilisis convallis. Ut non.
-                              non. vitae faucibus placerat eu vitae lacus ex sapien risus malesuada Praesent tincidunt nec vitae
-                              sollicitudin. dui nec nibh enim. quis id eget vitae urna. luctus urna eget
+                              At Reaching Asia Ltd, we believe in the transformative power of data. Our journey began with a
+                              mission to empower businesses and organizations with seamless data management solutions that drive
+                              efficiency and innovation. Over the years, we’ve partnered with diverse clients, helping them unlock
+                              the potential of their data to make informed decisions and achieve sustainable growth.
                         </p>
                         {!user && (
                               <Button

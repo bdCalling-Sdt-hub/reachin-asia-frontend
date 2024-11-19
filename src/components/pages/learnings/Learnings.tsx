@@ -38,9 +38,10 @@ const Learnings = () => {
                                     Our Latest <span className="text-primary">Blog</span>
                               </h1>
                               <p className="text-subtitle text-start my-4">
-                                    Ipsum commodo Sed sed libero, leo. lorem. sollicitudin. Ut est. Lorem facilisis convallis. Ut
-                                    non. non. vitae faucibus placerat eu vitae lacus ex sapien risus malesuada Praesent tincidunt
-                                    nec vitae sollicitudin. dui nec nibh enim. quis id eget vitae urna. luctus urna eget
+                                    Discover insightful articles on the latest trends, tips, and updates in the industry. Stay
+                                    informed with valuable content that helps you navigate and succeed. From expert opinions to
+                                    practical guides, our blog is your go-to resource for continuous learning and growth. Dive
+                                    into knowledge and stay ahead!
                               </p>
                         </div>
                         {/* <div className="absolute top-0 right-0 flex justify-end">

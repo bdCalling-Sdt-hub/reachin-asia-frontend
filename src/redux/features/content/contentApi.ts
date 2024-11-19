@@ -59,8 +59,18 @@ const contentApi = baseApi.injectEndpoints({
                   },
             }),
             getFaqs: build.query({
-                  query: () => ({ url: '/faq', method: 'GET' }),
-                  transformResponse: (response: TApiResponse<TFaq[]>) => response.data,
+                  query: (args) => {
+                        const params = new URLSearchParams();
+                        if (args) {
+                              args.forEach((arg: TQueryParams) => {
+                                    params.append(arg.name, arg.value as string);
+                              });
+                        }
+                        return { url: '/faq', method: 'GET', params };
+                  },
+                  transformResponse: (response: any) => {
+                        return { faqs: response.data.faqs, meta: response.data.meta };
+                  },
             }),
             getTerms: build.query({
                   query: () => ({ url: '/rule/terms-and-conditions', method: 'GET' }),

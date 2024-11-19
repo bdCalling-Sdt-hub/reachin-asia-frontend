@@ -1,12 +1,15 @@
 'use client';
 import Loader from '@/components/ui/shared/Loader';
 import { useGetFaqsQuery } from '@/redux/features/content/contentApi';
-import { Collapse, theme } from 'antd';
+import { Collapse, Pagination, theme } from 'antd';
+import { useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs';
 
 const FaqCollapse = () => {
       const { token } = theme.useToken();
-      const { data: faqs, isLoading } = useGetFaqsQuery([]);
+      const [currentPage, setCurrentPage] = useState(1); // Current page state
+      const { data: faqsData = {}, isLoading } = useGetFaqsQuery([{ name: 'page', value: currentPage }]);
+      const { faqs = [], meta } = faqsData;
 
       // Custom panel style
       const panelStyle = {
@@ -22,6 +25,11 @@ const FaqCollapse = () => {
             return <Loader />;
       }
 
+      // Handle page change
+      const handlePageChange = (page: number) => {
+            setCurrentPage(page);
+      };
+
       return (
             <div className="container">
                   <div className="space-y-6 max-w-[901px] text-center mx-auto">
@@ -33,7 +41,7 @@ const FaqCollapse = () => {
                         <h2 className="text-primary text-lg">About Billing and Invoices</h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                        {faqs?.map((item: { _id: string; question: string; answer: string }) => (
+                        {faqs.map((item: { _id: string; question: string; answer: string }) => (
                               <Collapse
                                     key={item._id}
                                     bordered={false}
@@ -66,9 +74,15 @@ const FaqCollapse = () => {
                               />
                         ))}
                   </div>
-                  {/* <div className="flex justify-center">
-                        <Pagination pageSize={3} total={faqs.length} />
-                  </div> */}
+                  <div className="flex justify-center mt-6">
+                        <Pagination
+                              current={currentPage}
+                              pageSize={10}
+                              total={meta?.total || 0}
+                              onChange={handlePageChange}
+                              showSizeChanger={false}
+                        />
+                  </div>
             </div>
       );
 };

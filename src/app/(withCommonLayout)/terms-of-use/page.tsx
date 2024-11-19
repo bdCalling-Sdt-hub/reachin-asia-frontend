@@ -1,4 +1,4 @@
-'use client   ';
+'use client';
 import PolicyHeader from '@/components/ui/shared/PolicyHeader';
 import { useGetTermsQuery } from '@/redux/features/content/contentApi';
 const TermsAndConditionPage = () => {

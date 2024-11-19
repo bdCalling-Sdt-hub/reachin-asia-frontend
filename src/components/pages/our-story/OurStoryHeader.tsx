@@ -17,17 +17,19 @@ const OurStoryHeader = () => {
                               non. vitae faucibus placerat eu vitae lacus ex sapien risus malesuada Praesent tincidunt nec vitae
                               sollicitudin. dui nec nibh enim. quis id eget vitae urna. luctus urna eget
                         </p>
-                        <Button
-                              href="/success-story"
-                              type="primary"
-                              shape="round"
-                              style={{
-                                    width: 'fit',
-                                    height: 46,
-                              }}
-                        >
-                              Sign Up
-                        </Button>
+                        {!user && (
+                              <Button
+                                    href="/success-story"
+                                    type="primary"
+                                    shape="round"
+                                    style={{
+                                          width: 'fit',
+                                          height: 46,
+                                    }}
+                              >
+                                    Sign Up
+                              </Button>
+                        )}
                   </div>
                   <div>
                         <Image className="w-[592px]" src={OurStoryImage} width={1000} height={1000} alt="our-story" />

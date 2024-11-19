@@ -46,7 +46,7 @@ const HeroSection = () => {
                                                       key={index}
                                                       className={`text-subtitle rounded-full py-1 px-3 border cursor-pointer ${
                                                             selectedCategory === category
-                                                                  ? 'border-primary bg-primary text-[#F0F8FF]'
+                                                                  ? 'border-primary bg-primary text-white duration-300'
                                                                   : 'border-subtitle'
                                                       }`}
                                                       onClick={() => handleCategorySelect(category)}

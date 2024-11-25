@@ -5,9 +5,14 @@ import React from 'react';
 import OurStoryImage from '@/assets/images/our-story/hero.svg';
 import { useAppSelector } from '@/redux/hooks';
 const OurStoryHeader = () => {
+      // Todo: Replace with actual user
+
+      // IDEA: Replace with actual user
+
       const { user } = useAppSelector((state) => state.auth);
+
       return (
-            <div className="grid items-center container my-20 grid-cols-1 md:grid-cols-2">
+            <div className="container grid items-center grid-cols-1 my-20 md:grid-cols-2">
                   <div className="space-y-5 max-w-[490px]">
                         <h1 className="text-4xl font-semibold">
                               Our <span className="text-primary">Story</span>
@@ -20,7 +25,7 @@ const OurStoryHeader = () => {
                         </p>
                         {!user && (
                               <Button
-                                    href="/success-story"
+                                    href="/register"
                                     type="primary"
                                     shape="round"
                                     style={{

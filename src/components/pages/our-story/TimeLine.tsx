@@ -17,11 +17,11 @@ const Timeline = () => {
       }
       console.log(stories);
       return (
-            <div className="bg-white py-20">
+            <div className="py-20 bg-white">
                   <div className="container">
-                        <div className="text-center space-y-3 mb-8">
-                              <h2 className="text-primary text-xl font-semibold">Be The Change</h2>
-                              <h1 className="font-semibold text-5xl">Our Story</h1>
+                        <div className="mb-8 space-y-3 text-center">
+                              <h2 className="text-xl font-semibold text-primary">Be The Change</h2>
+                              <h1 className="text-5xl font-semibold">Our Story</h1>
                         </div>
 
                         <AntdTimeline mode="alternate" className="relative">
@@ -51,18 +51,18 @@ const Timeline = () => {
                                           }
                                     >
                                           <div className="bg-[#F8F9FD] min-h-[253px] max-w-[752px] p-5 w-full rounded-md">
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                      <div className="text-start h-full">
-                                                            <h3 className="text-xl md:text-2xl font-semibold">{story.subject}</h3>
-                                                            <p className="text-subtitle my-2">{story.answer}</p>
+                                                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                                      <div className="h-full text-start">
+                                                            <h3 className="text-xl font-semibold md:text-2xl">{story.subject}</h3>
+                                                            <p className="my-2 text-subtitle">{story.answer}</p>
                                                             <Link
-                                                                  className="text-primary flex items-center gap-2"
+                                                                  className="flex items-center gap-2 text-primary"
                                                                   href={`/our-story/${story._id}`}
                                                             >
                                                                   Read More <HiChevronDoubleRight />
                                                             </Link>
                                                       </div>
-                                                      <div className="h-full flex justify-center md:justify-end">
+                                                      <div className="flex justify-center h-full md:justify-end">
                                                             <Image
                                                                   src={Men}
                                                                   alt="story image"
@@ -89,7 +89,7 @@ const Timeline = () => {
                               >
                                     Today
                               </Button>
-                              <h1 className="text-3xl text-center my-2 font-medium">
+                              <h1 className="my-2 text-3xl font-medium text-center">
                                     Our journey has just been started
                                     <br /> Write our next chapter together.
                               </h1>

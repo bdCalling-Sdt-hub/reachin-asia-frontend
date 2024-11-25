@@ -19,6 +19,7 @@ export interface TStory {
       subject: string;
       year: number;
       answer: string;
+      image: string;
 }
 
 export interface TPrivacyPolicy {

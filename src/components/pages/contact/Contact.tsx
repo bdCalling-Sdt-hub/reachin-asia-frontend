@@ -48,6 +48,7 @@ const Contact = () => {
 
                                     <div className="flex justify-center">
                                           <Button
+                                                href="tel:1313165466"
                                                 shape="round"
                                                 type="primary"
                                                 style={{ width: 'fit', marginBottom: '20px', height: 46 }}

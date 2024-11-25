@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { TStory, useGetStoriesQuery } from '@/redux/features/content/contentApi';
 import Loader from '@/components/ui/shared/Loader';
+import { imageUrl } from '@/redux/base/baseApi';
 
 const Timeline = () => {
       const { data: stories = [], isLoading } = useGetStoriesQuery([]);
@@ -64,7 +65,7 @@ const Timeline = () => {
                                                       </div>
                                                       <div className="flex justify-center h-full md:justify-end">
                                                             <Image
-                                                                  src={Men}
+                                                                  src={`${imageUrl}/${story.image}`}
                                                                   alt="story image"
                                                                   width={500}
                                                                   height={500}

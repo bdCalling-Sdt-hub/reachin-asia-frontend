@@ -23,7 +23,7 @@ const Dashboard = ({ id }: Props) => {
 
                         {/* Center Column */}
                         <div className="space-y-6">
-                              <CompanyOverview people={people!} />
+                              <CompanyOverview overview={people?.overview!} />
                               <EmployeesManagementLevel people={people!} />
                         </div>
 

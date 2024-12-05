@@ -36,8 +36,11 @@ export type Company = {
       dunsNumber: string;
       country: string;
       trade: string;
-      facebook: string;
-      twitter: string;
+      instagram?: string;
+      facebook?: string;
+      twitter?: string;
+      linkedin?: string;
+      youtube?: string;
       address: string;
       headquarters: string;
       decisionHq: string;

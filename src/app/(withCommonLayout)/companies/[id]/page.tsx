@@ -1,7 +1,13 @@
-'use client';
+import CompanyBusinessCard from '@/components/pages/details/CompanyBussinessCard';
+import CompanyDashboard from '@/components/pages/details/CompanyDashboard';
 
 const CompanyDetailsPage = ({ params }: { params: { id: string } }) => {
-      return <div className="container mx-auto px-5 py-10"></div>;
+      return (
+            <div>
+                  <CompanyBusinessCard id={params.id} />
+                  <CompanyDashboard id={params.id} />
+            </div>
+      );
 };
 
 export default CompanyDetailsPage;

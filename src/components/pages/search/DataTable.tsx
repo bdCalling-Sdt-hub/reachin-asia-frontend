@@ -82,7 +82,7 @@ const DataTable: React.FC = () => {
                                 title: '',
                                 key: 'details',
                                 render: (record: any) => (
-                                      <Button href={`/details/${record._id}`} shape="round" type="primary">
+                                      <Button href={`/peoples/${record._id}`} shape="round" type="primary">
                                             Details
                                       </Button>
                                 ),
@@ -124,7 +124,7 @@ const DataTable: React.FC = () => {
                                 title: '',
                                 key: 'details',
                                 render: (record: any) => (
-                                      <Button href={`/details/${record._id}`} shape="round" type="primary">
+                                      <Button href={`/companies/${record._id}`} shape="round" type="primary">
                                             Details
                                       </Button>
                                 ),

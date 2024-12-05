@@ -1,5 +1,5 @@
 import { baseApi } from '@/redux/base/baseApi';
-import { TQueryParams } from '@/types';
+import { TApiResponse, TQueryParams } from '@/types';
 export type CompanyResponse = {
       success: boolean;
       message: string;
@@ -131,14 +131,18 @@ export const dataManagementApi = baseApi.injectEndpoints({
             }),
 
             // Get single data
-            getSingleData: builder.query({
-                  query: (id) => ({
-                        url: `/data/${id}`,
-                        method: 'GET',
-                  }),
+            getSingleCompany: builder.query({
+                  query: (id) => ({ url: `/company/${id}`, method: 'GET' }),
                   providesTags: ['Data'],
+                  transformResponse: (response: TApiResponse<Company>) => response.data,
+            }),
+            getSinglePeople: builder.query({
+                  query: (id) => ({ url: `/people/${id}`, method: 'GET' }),
+                  providesTags: ['Data'],
+                  transformResponse: (response: TApiResponse<People>) => response.data,
             }),
       }),
 });
 
-export const { useGetAllCompaniesQuery, useGetAllPeopleQuery, useGetSingleDataQuery } = dataManagementApi;
+export const { useGetAllCompaniesQuery, useGetAllPeopleQuery, useGetSingleCompanyQuery, useGetSinglePeopleQuery } =
+      dataManagementApi;

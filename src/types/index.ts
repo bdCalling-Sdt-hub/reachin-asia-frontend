@@ -15,14 +15,51 @@ export type TQueryParams = {
       value: string | number;
 };
 
+export type TPersonal = {
+    contact_name: string;
+    title: string;
+    address: string;
+    email: string;
+    hq_phone: string;
+    line: string;
+    mobile_number: string;
+    website: string;
+};
+
+export type TDetails = {
+    company_name: string;
+    industry: string;
+    total_employee: string;
+    estimate_revenue: string;
+    location: string;
+    hq_location: string;
+    overview: string;
+};
+
+export type TManagement = {
+    open_contact: string;
+    non_monger: string;
+    monger: string;
+    director_count: string;
+    c_level: string;
+};
+
+export type TContact = {
+    instagram: string;
+    facebook: string;
+    twitter: string;
+    linkedin_profile: string;
+    youtube_channel: string;
+};
+
 export type TPeople = {
-      _id: string;
-      name: string;
-      email?: string;
-      phone?: string;
-      company?: string;
-      title?: string;
-      // Add more fields as needed based on your actual data structure
+    _id: string;
+    personal: TPersonal;
+    details: TDetails;
+    management: TManagement;
+    contact: TContact;
+    createdAt?: string;
+    updatedAt?: string;
 };
 
 export type TPeopleResponse = {

@@ -1,5 +1,7 @@
 'use client';
+import CompanyEmployeeManagement from './CompanyEmployeeManagement';
 import CompanyOverview from './CompanyOverView';
+
 import NewsFeed from './NewsFeed';
 import { useGetSingleCompanyQuery } from '@/redux/features/data-management/dataManagementApi';
 
@@ -16,7 +18,7 @@ const CompanyDashboard = ({ id }: Props) => {
                         </div>
                         <div className="col-span-12 md:col-span-8 space-y-6">
                               <CompanyOverview overview={company?.description as string} />
-                              {/* <EmployeesManagementLevel company={company!} /> */}
+                              <CompanyEmployeeManagement company={company!} />
                         </div>
                   </div>
             </div>

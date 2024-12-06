@@ -18,21 +18,19 @@ const DataTable: React.FC = () => {
             { name: 'limit', value: pageSize.toString() },
       ];
 
-      // Fetch data based on active filter
       const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery(queryParams, {
             skip: activeFilter !== 'peoples',
       });
-      console.log(peopleData);
+
       const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery(queryParams, {
             skip: activeFilter !== 'companies',
       });
 
       const handleFilterClick = (filter: FilterType) => {
             setActiveFilter(filter === activeFilter ? null : filter);
-            setCurrentPage(1); // Reset to first page when switching filters
+            setCurrentPage(1);
       };
 
-      // Define table columns based on active filter
       const columns =
             activeFilter === 'peoples'
                   ? [

@@ -1,8 +1,7 @@
 'use client';
 import { Layout } from 'antd';
 import Sider from 'antd/es/layout/Sider';
-import React, { useState } from 'react';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 import Sidebar from '@/components/pages/search/Sidebar';
 import DataTable from '@/components/pages/search/DataTable';
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go';

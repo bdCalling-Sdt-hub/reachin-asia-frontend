@@ -1,30 +1,47 @@
 'use client';
 import { useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/features/data-management/dataManagementApi';
 import { Table, Button, Pagination } from 'antd';
-import { useState } from 'react';
-import { render } from 'react-dom';
+import { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
+import { useSearchParams } from 'next/navigation';
 
 // Define types for filter and table data
 type FilterType = 'peoples' | 'companies' | null;
 
 const DataTable: React.FC = () => {
-      const [activeFilter, setActiveFilter] = useState<FilterType>('peoples');
       const [currentPage, setCurrentPage] = useState(1);
-      const pageSize = 10;
+      const [activeFilter, setActiveFilter] = useState<FilterType>('peoples');
+      const { searchText } = useAppSelector((state) => state.filter);
+      const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery([
+            { name: 'page', value: currentPage },
+            { name: 'limit', value: 10 },
+
+            { name: 'search', value: searchText },
+      ]);
+
+      const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery([
+            {
+                  name: 'page',
+                  value: currentPage,
+            },
+            { name: 'limit', value: 10 },
+            { name: 'search', value: searchText },
+      ]);
+      const dispatch = useAppDispatch();
+      const searchParams = useSearchParams();
+
+      useEffect(() => {
+            const searchTerm = searchParams.get('searchTerm');
+            const category = searchParams.get('category');
+
+            if (searchTerm) dispatch(setSearchText(searchTerm));
+            if (category) dispatch(setSelectedCategory(category));
+      }, [searchParams, dispatch]);
+
+      // Todo: need dynamic data
 
       // Query parameters
-      const queryParams = [
-            { name: 'page', value: currentPage.toString() },
-            { name: 'limit', value: pageSize.toString() },
-      ];
-
-      const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery(queryParams, {
-            skip: activeFilter !== 'peoples',
-      });
-
-      const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery(queryParams, {
-            skip: activeFilter !== 'companies',
-      });
 
       const handleFilterClick = (filter: FilterType) => {
             setActiveFilter(filter === activeFilter ? null : filter);
@@ -176,7 +193,7 @@ const DataTable: React.FC = () => {
                         <Pagination
                               current={currentPage}
                               total={totalItems}
-                              pageSize={pageSize}
+                              pageSize={10}
                               onChange={handlePageChange}
                               showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
                               className="w-full sm:w-auto text-xs sm:text-sm"

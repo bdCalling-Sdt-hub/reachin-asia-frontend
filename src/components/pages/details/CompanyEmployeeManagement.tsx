@@ -5,6 +5,7 @@ import { Tooltip } from 'antd';
 import { Cell, Pie, PieChart } from 'recharts';
 
 const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
+      // TODO: need dynamic data
       console.log('company', company);
       const data = [
             { name: 'Manager', value: 200, color: '#D9792F' },

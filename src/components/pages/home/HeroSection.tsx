@@ -3,17 +3,30 @@ import { Button, Input } from 'antd';
 import Image from 'next/image';
 import HeroImg from '@/assets/images/home/hero-banner.svg';
 import { IoSearchOutline } from 'react-icons/io5';
-import { setSelectedCategory } from '@/redux/features/categoryFilter/categoryFilterSlice';
+import { useRouter } from 'next/navigation';
+
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
 
 const HeroSection = () => {
+      const router = useRouter();
       const dispatch = useAppDispatch();
-      const { selectedCategory } = useAppSelector((state) => state.categoryFilter);
+      const { selectedCategory, searchText } = useAppSelector((state) => state.filter);
+
       const categories = ['Prospecting Company', 'Person', 'Find Talent', 'Job'];
 
       const handleCategorySelect = (category: string) => {
             dispatch(setSelectedCategory(category));
       };
+
+      const handleSearchTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            dispatch(setSearchText(event.target.value));
+      };
+
+      const handleAdvanceSearch = () => {
+            router.push(`/search?q=${searchText}&category=${selectedCategory || ''}`);
+      };
+
       return (
             <section className="bg-[#F8F9FD] min-h-[calc(100vh-80px)] grid justify-center  py-10 md:py-0">
                   <div className="container mx-auto flex flex-col-reverse md:flex-row gap-5 items-center justify-between ">
@@ -27,6 +40,8 @@ const HeroSection = () => {
                               <br />
                               <div>
                                     <Input
+                                          value={searchText}
+                                          onChange={handleSearchTextChange}
                                           prefix={<IoSearchOutline className="mx-5" color="#6B6B6B" size={22} />}
                                           style={{
                                                 backgroundColor: 'white',
@@ -60,7 +75,7 @@ const HeroSection = () => {
                               {/* Buttons */}
                               <div className="flex flex-wrap gap-5 mt-5 md:gap-3 space-x-4 justify-center md:justify-start ">
                                     <Button
-                                          href="/search"
+                                          onClick={handleAdvanceSearch}
                                           shape="round"
                                           style={{
                                                 height: 40,

@@ -24,7 +24,7 @@ const HeroSection = () => {
       };
 
       const handleAdvanceSearch = () => {
-            router.push(`/search?q=${searchText}&category=${selectedCategory || ''}`);
+            router.push(`/search?searchText=${searchText}&category=${selectedCategory || ''}`);
       };
 
       return (

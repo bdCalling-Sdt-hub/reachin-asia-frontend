@@ -32,10 +32,10 @@ const DataTable: React.FC = () => {
       const searchParams = useSearchParams();
 
       useEffect(() => {
-            const searchTerm = searchParams.get('searchTerm');
+            const searchText = searchParams.get('searchText');
             const category = searchParams.get('category');
 
-            if (searchTerm) dispatch(setSearchText(searchTerm));
+            if (searchText) dispatch(setSearchText(searchText));
             if (category) dispatch(setSelectedCategory(category));
       }, [searchParams, dispatch]);
 

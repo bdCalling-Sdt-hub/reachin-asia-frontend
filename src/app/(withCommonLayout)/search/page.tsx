@@ -29,7 +29,7 @@ const SearchPage = () => {
                         }}
                         collapsed={collapsed}
                         onCollapse={toggleSidebar}
-                        width={230} // Full width of the sidebar when expanded
+                        width={300} // Full width of the sidebar when expanded
                         collapsedWidth={60} // Width of the sidebar when collapsed
                   >
                         <div className="p-4">

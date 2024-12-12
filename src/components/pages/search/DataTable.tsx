@@ -1,6 +1,6 @@
 'use client';
-import { useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/features/data-management/dataManagementApi';
-import { Table, Button, Pagination } from 'antd';
+import { People, useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/features/data-management/dataManagementApi';
+import { Table, Button, Pagination, Tooltip } from 'antd';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
@@ -57,7 +57,9 @@ const DataTable: React.FC = () => {
                                 key: 'name',
                                 render: (name: string, record: any, index: number) => (
                                       <div>
-                                            <p className="font-semibold">{name}</p>
+                                            <p className="font-semibold">
+                                                  {record.first_name} {record.last_name}
+                                            </p>
                                             <p>{record.companyName}</p>
                                       </div>
                                 ),
@@ -66,26 +68,35 @@ const DataTable: React.FC = () => {
                                 title: 'Contact Information',
                                 dataIndex: 'contactInfo',
                                 key: 'contactInfo',
-                                render: () => (
+                                render: (contactInfo: string, record: People, index: number) => (
                                       <div className="flex gap-2">
-                                            <span className="bg-primary text-white rounded-full px-2 py-1">HQ</span>
-                                            <span className="bg-primary text-white rounded-full px-2 py-1">M</span>
-                                            <span className="bg-primary text-white rounded-full px-2 py-1">D</span>
-                                            <span className="bg-primary text-white rounded-full px-2 py-1">E</span>
+                                            <Tooltip title={record.hq_phone}>
+                                                  <span className="bg-primary text-white rounded-full px-2 py-1">HQ</span>
+                                            </Tooltip>
+
+                                            <Tooltip title={record.mobile}>
+                                                  <span className="bg-primary text-white rounded-full px-2 py-1">M</span>
+                                            </Tooltip>
+                                            <Tooltip title={record.hq_location}>
+                                                  <span className="bg-primary text-white rounded-full px-2 py-1">D</span>
+                                            </Tooltip>
+                                            <Tooltip title={record.email}>
+                                                  <span className="bg-primary text-white rounded-full px-2 py-1">E</span>
+                                            </Tooltip>
                                       </div>
                                 ),
                           },
                           {
                                 title: 'Company Name',
-                                dataIndex: 'companyName',
-                                key: 'companyName',
+                                dataIndex: 'company_name',
+                                key: 'company_name',
                                 render: (companyName: string) => <p className=" capitalize">{companyName}</p>,
                           },
                           {
                                 title: 'Title',
-                                dataIndex: 'designation',
-                                key: 'designation',
-                                render: (designation: string) => <p className=" capitalize">{designation}</p>,
+                                dataIndex: 'title',
+                                key: 'title',
+                                render: (title: string) => <p className=" capitalize">{title}</p>,
                           },
                           {
                                 title: 'Company Industry',
@@ -183,7 +194,7 @@ const DataTable: React.FC = () => {
                   <Table
                         scroll={{ x: 600 }}
                         columns={columns}
-                        dataSource={currentData}
+                        dataSource={currentData as any}
                         pagination={false}
                         loading={isLoading}
                         rowKey="id"

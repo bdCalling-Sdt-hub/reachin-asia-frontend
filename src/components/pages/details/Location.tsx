@@ -10,11 +10,13 @@ const Locations: React.FC<{ people: People }> = ({ people }) => {
                         <div className="space-y-3 text-subtitle">
                               <div>
                                     <p className=" font-medium">Local</p>
-                                    <p>{people?.location}</p>
+                                    <p>
+                                          {people?.company_country}, {people?.company_city}
+                                    </p>
                               </div>
                               <div>
                                     <p className=" font-medium">HQ</p>
-                                    <p>{people?.hqLocation}</p>
+                                    <p>{people?.hq_location ? people?.hq_location : 'Not Indicated'}</p>
                               </div>
                         </div>
                   </div>

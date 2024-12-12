@@ -2,12 +2,14 @@
 import { Layout } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useState } from 'react';
-import Sidebar from '@/components/pages/search/Sidebar';
 import DataTable from '@/components/pages/search/DataTable';
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go';
+import Sidebar from '@/components/pages/search/Sidebar';
+export type FilterType = 'peoples' | 'companies' | null;
 
 const SearchPage = () => {
       const [collapsed, setCollapsed] = useState(false);
+      const [activeFilter, setActiveFilter] = useState<FilterType>('peoples');
 
       const toggleSidebar = () => {
             setCollapsed(!collapsed);
@@ -29,16 +31,25 @@ const SearchPage = () => {
                         }}
                         collapsed={collapsed}
                         onCollapse={toggleSidebar}
-                        width={300} // Full width of the sidebar when expanded
-                        collapsedWidth={60} // Width of the sidebar when collapsed
+                        width={300}
+                        collapsedWidth={60}
                   >
                         <div className="p-4">
-                              <div className="flex justify-end">
+                              <div className="flex justify-between">
+                                    {!collapsed && (
+                                          <div>
+                                                <h1 className="text-xl font-bold text-title">Filters</h1>
+                                          </div>
+                                    )}
                                     <button onClick={toggleSidebar} className="mb-4 border border-[#BABABA] rounded-full">
-                                          {collapsed ? <GoChevronRight size={24} /> : <GoChevronLeft size={24} />}
+                                          {collapsed ? (
+                                                <GoChevronRight size={24} className="text-title" />
+                                          ) : (
+                                                <GoChevronLeft size={24} className="text-title" />
+                                          )}
                                     </button>
                               </div>
-                              {!collapsed && <Sidebar />}
+                              {!collapsed && <Sidebar activeFilter={activeFilter} />}
                         </div>
                   </Sider>
 
@@ -49,7 +60,7 @@ const SearchPage = () => {
                         }}
                   >
                         <div className="p-4">
-                              <DataTable />
+                              <DataTable activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
                         </div>
                   </Layout>
             </Layout>

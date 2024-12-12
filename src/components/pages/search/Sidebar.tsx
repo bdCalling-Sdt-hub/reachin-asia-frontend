@@ -1,312 +1,270 @@
-// components/Sidebar.js
-import { Collapse, Checkbox } from 'antd';
-import { MdLocationCity } from 'react-icons/md';
-import { PiUsersThree } from 'react-icons/pi';
-import { useState } from 'react';
+import { Collapse, Radio } from 'antd';
+
+import { useAppDispatch } from '@/redux/hooks';
+import {
+      setSelectedCompanyType,
+      setSelectedEmployee,
+      setSelectedEmployeeTotal,
+      setSelectedFunction,
+      setSelectedIndustry,
+      setSelectedManageLevel,
+      setSelectedOwnership,
+      setSelectedRegion,
+      setSelectedRevenueRange,
+      setSelectedSales,
+      setSelectedSeniority,
+      setSelectedSource,
+} from '@/redux/features/filter/filterSlice';
+import {
+      companyTypes,
+      employeeRanges,
+      employeeTotals,
+      functions,
+      industries,
+      ownershipTypes,
+      primaryIndustries,
+      regions,
+      revenueRanges,
+      salesRanges,
+      seniorityLevels,
+      sources,
+      subIndustries,
+} from './constant';
+import { Dispatch, SetStateAction } from 'react';
+import { FilterType } from '@/app/(withCommonLayout)/search/page';
 
 const { Panel } = Collapse;
 
-// Job function data structure
-const jobFunctions = [
-      {
-            title: 'C-Suite',
-            items: [
-                  'Engineering & Technical Executive',
-                  'Executive',
-                  'Finance Executive',
-                  'Human Resources Executive',
-                  'Information Technology Executive',
-                  'Legal Executive',
-                  'Marketing Executive',
-                  'Medical & Health Executive',
-                  'Operations Executive',
-                  'Sales Executive',
-            ],
-      },
-      {
-            title: 'Engineering & Technical',
-            items: [
-                  'Artificial Intelligence / Machine Learning',
-                  'Bioengineering',
-                  'Biometrics',
-                  'Business Intelligence',
-                  'Chemical Engineering',
-                  'Cloud / Mobility',
-                  'Data Science',
-                  'DevOps',
-                  'Digital Transformation',
-                  'Engineering Technology / Innovation',
-                  'Engineering & Technical',
-                  'Industrial Engineering',
-                  'Mobile Development',
-                  'Product Development',
-                  'Product Management',
-                  'Project Management',
-                  'Research & Development',
-                  'Scrum Master / Agile Coach',
-                  'Software Development',
-                  'Support / Technical Services',
-                  'Technology Operations',
-                  'Test / Quality Assurance',
-                  'UI / UX',
-                  'Web Development',
-            ],
-      },
-      {
-            title: 'Finance',
-            items: [
-                  'Accounting',
-                  'Compliance',
-                  'Controller',
-                  'Financial Planning & Analysis',
-                  'Financial Reporting',
-                  'Financial Strategy',
-                  'Financial Systems',
-                  'Internal Audit & Control',
-                  'Investor Relations',
-                  'Mergers & Acquisitions',
-                  'Real Estate',
-                  'Risk',
-                  'Shared Services',
-                  'Sourcing / Procurement',
-                  'Tax',
-                  'Treasury',
-            ],
-      },
-      {
-            title: 'Human Resources',
-            items: [
-                  'Compensation & Benefits',
-                  'Diversity & Inclusion',
-                  'Employee & Labor Relations',
-                  'Health & Safety',
-                  'Human Resource Information System',
-                  'Human Resources',
-                  'Learning & Development',
-                  'Organizational Development',
-                  'Recruiting & Talent Acquisition',
-                  'Talent Management',
-                  'Workforce Management',
-            ],
-      },
-      {
-            title: 'Information Technology',
-            items: [
-                  'Application Development',
-                  'Business Systems Management / ITSM',
-                  'Cloud / Mobility',
-                  'Collaboration & Web Apps',
-                  'Data Center',
-                  'Database Administration',
-                  'eCommerce',
-                  'Enterprise Architecture',
-                  'Help Desk / Desktop Services',
-                  'HR / Financial / ERP Systems',
-                  'Information Security',
-                  'Information Technology',
-                  'Infrastructure',
-                  'IT Asset Management',
-                  'IT Audit / IT Compliance',
-                  'IT Development',
-                  'IT Strategy',
-                  'IT Training',
-                  'Networking',
-                  'Project & Program Management',
-                  'Quality Assurance',
-                  'Retail / Store Systems',
-                  'Servers',
-                  'Storage & Disaster Recovery',
-                  'Telecommunications',
-                  'Virtualization',
-            ],
-      },
-      {
-            title: 'Legal',
-            items: [
-                  'Acquisitions',
-                  'Compliance',
-                  'Contracts',
-                  'Corporate Secretary',
-                  'eDiscovery',
-                  'Ethics',
-                  'Governance',
-                  'Government Affairs & Regulatory Law',
-                  'Intellectual Property & Patent',
-                  'Labor & Employment',
-                  'Lawyer / Attorney',
-                  'Legal',
-                  'Legal Counsel',
-                  'Legal Operations',
-                  'Litigation',
-                  'Privacy',
-            ],
-      },
-      {
-            title: 'Marketing',
-            items: [
-                  'Advertising',
-                  'Brand Management',
-                  'Content Marketing',
-                  'Customer Experience',
-                  'Customer Marketing',
-                  'Demand Generation',
-                  'Digital Marketing',
-                  'eCommerce',
-                  'Event Marketing',
-                  'Field Marketing',
-                  'Graphic Design',
-                  'Lead Generation',
-                  'Marketing',
-                  'Marketing Analytics / Insights',
-                  'Marketing Communications',
-                  'Marketing Operations',
-                  'Product Marketing',
-                  'Public Relations (PR)',
-                  'Revenue Operations',
-                  'Search Engine Optimization / Pay Per Click',
-                  'Social Media Marketing',
-                  'Strategic Communications',
-                  'Technical Marketing',
-            ],
-      },
-      {
-            title: 'Medical & Health',
-            items: [
-                  'Anesthesiology',
-                  'Chiropractic',
-                  'Clinical Operations',
-                  'Clinical Systems',
-                  'Dentistry',
-                  'Dermatology',
-                  'Doctors / Physicians',
-                  'Epidemiology',
-                  'First Responder',
-                  'Infectious Disease',
-                  'Medical Administration',
-                  'Medical Education & Training',
-                  'Medical Research',
-                  'Medicine',
-                  'Neurology',
-                  'Nursing',
-                  'Nutrition & Dietetics',
-                  'Obstetrics / Gynecology',
-                  'Oncology',
-                  'Ophthalmology',
-                  'Optometry',
-                  'Orthopedics',
-                  'Pathology',
-                  'Pediatrics',
-                  'Pharmacy',
-                  'Physical Therapy',
-                  'Psychiatry',
-                  'Psychology',
-                  'Public Health',
-                  'Radiology',
-                  'Social Work',
-                  'Surgery',
-            ],
-      },
-      {
-            title: 'Operations',
-            items: [
-                  'Call Center',
-                  'Construction',
-                  'Corporate Strategy',
-                  'Customer Service / Support',
-                  'Enterprise Resource Planning',
-                  'Facilities Management',
-                  'Leasing',
-                  'Logistics',
-                  'Office Operations',
-                  'Operations',
-                  'Physical Security',
-                  'Project Development',
-                  'Quality Management',
-                  'Real Estate',
-                  'Safety',
-                  'Store Operations',
-                  'Supply Chain',
-            ],
-      },
-      {
-            title: 'Sales',
-            items: [
-                  'Account Management',
-                  'Business Development',
-                  'Channel Sales',
-                  'Customer Retention & Development',
-                  'Enterprise Sales',
-                  'Field / Outside Sales',
-                  'Inside Sales',
-                  'Partnerships',
-                  'Revenue Operations',
-                  'Sales',
-                  'Sales Enablement',
-                  'Sales Engineering',
-                  'Sales Operations',
-                  'Sales Training',
-            ],
-      },
-];
+type Props = {
+      activeFilter: FilterType;
+};
+const Sidebar = ({ activeFilter }: Props) => {
+      const dispatch = useAppDispatch();
 
-const Sidebar = () => {
-      const [selectedItems, setSelectedItems] = useState<string[]>([]);
-
-      const onChange = (checkedValues: string[]) => {
-            setSelectedItems(checkedValues);
+      // Note: onChangeHandler is a function that returns a function
+      const onChangeHandler = (actionCreator: (value: string) => any) => {
+            return (checkedValues: string) => {
+                  dispatch(actionCreator(checkedValues));
+            };
       };
+
+      // Note: onXXXChange is a function that returns a function
+      const onManageLevelChange = onChangeHandler(setSelectedManageLevel);
+      const onCompanyTypeChange = onChangeHandler(setSelectedCompanyType);
+      const onEmployeeChange = onChangeHandler(setSelectedEmployee);
+      const onSalesChange = onChangeHandler(setSelectedSales);
+      const onIndustryChange = onChangeHandler(setSelectedIndustry);
+      const onRegionChange = onChangeHandler(setSelectedRegion);
+      const onOwnershipChange = onChangeHandler(setSelectedOwnership);
+      const onFunctionChange = onChangeHandler(setSelectedFunction);
+      const onSeniorityChange = onChangeHandler(setSelectedSeniority);
+      const onEmployeeTotalChange = onChangeHandler(setSelectedEmployeeTotal);
+      const onSourceChange = onChangeHandler(setSelectedSource);
+      const onRevenueRangeChange = onChangeHandler(setSelectedRevenueRange);
 
       return (
             <div className="p-4">
-                  {/* Management Level Section */}
-                  <h1 className="font-semibold flex items-center gap-3 mt-6 mb-4">
-                        <span>
-                              <PiUsersThree color="#2375D0" size={28} />
-                        </span>
-                        Management Level
-                  </h1>
-                  <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
-                        <Panel header={<p className="text-[#6B6B6B]">All</p>} key="1">
-                              <Checkbox.Group className="flex flex-col">
-                                    <div>Not Provided</div>
-                              </Checkbox.Group>
-                        </Panel>
-                        <Panel header={<p className="text-[#6B6B6B]">C-Level</p>} key="2">
-                              <Checkbox.Group className="flex flex-col">
-                                    <div>Not Provided</div>
-                              </Checkbox.Group>
-                        </Panel>
-                        <Panel header={<p className="text-[#6B6B6B]">VP-Level</p>} key="3">
-                              <Checkbox.Group className="flex flex-col">
-                                    <div>Not Provided</div>
-                              </Checkbox.Group>
-                        </Panel>
-                        <Panel header={<p className="text-[#6B6B6B]">Director</p>} key="4">
-                              <Checkbox.Group className="flex flex-col">
-                                    <div>Not Provided</div>
-                              </Checkbox.Group>
-                        </Panel>
-                  </Collapse>
-                  <h1 className="font-semibold flex items-center gap-3 my-4 ">
-                        <span>
-                              <PiUsersThree color="#2375D0" size={28} />
-                        </span>
-                        Job Functions
-                  </h1>
-
-                  <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
-                        {jobFunctions.map((category, index) => (
-                              <Panel header={<p className="text-[#6B6B6B]">{category.title}</p>} key={index.toString()}>
-                                    <Checkbox.Group className="flex flex-col gap-2" value={selectedItems} onChange={onChange}>
-                                          {category.items.map((item) => (
-                                                <Checkbox key={item} value={item}>
-                                                      {item}
-                                                </Checkbox>
-                                          ))}
-                                    </Checkbox.Group>
+                  {activeFilter === 'peoples' && (
+                        <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
+                              <Panel header={<p className="text-[#6B6B6B]">Management Level</p>} key="management-level">
+                                    <Radio.Group onChange={(e) => onManageLevelChange(e.target.value)} className="flex flex-col">
+                                          <Radio value="">
+                                                <span className="text-sm text-subtitle">All</span>
+                                          </Radio>
+                                          <Radio value="C-Level">
+                                                <span className="text-sm text-subtitle">C-Level</span>
+                                          </Radio>
+                                          <Radio value="VP-Level">
+                                                <span className="text-sm text-subtitle">VP-Level</span>
+                                          </Radio>
+                                          <Radio value="Director">
+                                                <span className="text-sm text-subtitle">Director</span>
+                                          </Radio>
+                                    </Radio.Group>
                               </Panel>
-                        ))}
-                  </Collapse>
+
+                              {/* Functions Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Functions</p>} key="functions">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onFunctionChange(e.target.value)}
+                                    >
+                                          {functions.map((func) => (
+                                                <Radio key={func.value} value={func.value}>
+                                                      <span className="text-sm text-subtitle">{func.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Seniority Levels Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Seniority Levels</p>} key="seniority-levels">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onSeniorityChange(e.target.value)}
+                                    >
+                                          {seniorityLevels.map((level) => (
+                                                <Radio key={level.value} value={level.value}>
+                                                      <span className="text-sm text-subtitle">{level.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Primary Industries Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Primary Industries</p>} key="primary-industries">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onIndustryChange(e.target.value)}
+                                    >
+                                          {primaryIndustries.map((industry) => (
+                                                <Radio key={industry.value} value={industry.value}>
+                                                      <span className="text-sm text-subtitle">{industry.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Sub Industries Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Sub Industries</p>} key="sub-industries">
+                                    <Radio.Group className="flex flex-col gap-2">
+                                          {subIndustries.map((subIndustry) => (
+                                                <Radio key={subIndustry.value} value={subIndustry.value}>
+                                                      <span className="text-sm text-subtitle">{subIndustry.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Employee Totals Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Employee Totals</p>} key="employee-totals">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onEmployeeTotalChange(e.target.value)}
+                                    >
+                                          {employeeTotals.map((total) => (
+                                                <Radio key={total.value} value={total.value}>
+                                                      <span className="text-sm text-subtitle">{total.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Sources Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Sources</p>} key="sources">
+                                    <Radio.Group className="flex flex-col gap-2" onChange={(e) => onSourceChange(e.target.value)}>
+                                          {sources.map((source) => (
+                                                <Radio key={source.value} value={source.value}>
+                                                      <span className="text-sm text-subtitle">{source.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Revenue Ranges Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Revenue Ranges</p>} key="revenue-ranges">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onRevenueRangeChange(e.target.value)}
+                                    >
+                                          {revenueRanges.map((range) => (
+                                                <Radio key={range.value} value={range.value}>
+                                                      <span className="text-sm text-subtitle">{range.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+                        </Collapse>
+                  )}
+                  {activeFilter === 'companies' && (
+                        <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
+                              {/* Company Type Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Company Type</p>} key="company-type">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onCompanyTypeChange(e.target.value)}
+                                    >
+                                          {companyTypes.map((type) => (
+                                                <Radio key={type.value} value={type.value}>
+                                                      <span className="mx-2 my-1 text-subtitle block">{type.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Total Employees Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Total Employees</p>} key="total-employees">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onEmployeeChange(e.target.value)}
+                                    >
+                                          {employeeRanges.map((range) => (
+                                                <Radio key={range.value} value={range.value}>
+                                                      <span className="text-sm text-subtitle block mx-2 my-1">{range.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Sales Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Sales</p>} key="sales">
+                                    <Radio.Group className="flex flex-col gap-2" onChange={(e) => onSalesChange(e.target.value)}>
+                                          {salesRanges.map((range) => (
+                                                <Radio key={range.value} value={range.value}>
+                                                      <span className="text-sm text-subtitle block mx-2 my-1">{range.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+                              <Panel header={<p className="text-[#6B6B6B]">Ownership</p>} key="ownership">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onOwnershipChange(e.target.value)}
+                                    >
+                                          {ownershipTypes.map((range) => (
+                                                <Radio key={range.value} value={range.value}>
+                                                      <span className="text-sm text-subtitle block mx-2 my-1">{range.label}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Industry Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Industry</p>} key="industry">
+                                    <Radio.Group
+                                          className="flex flex-col gap-2"
+                                          onChange={(e) => onIndustryChange(e.target.value)}
+                                    >
+                                          {industries.map((industry) => (
+                                                <Radio key={industry} value={industry}>
+                                                      <span className="text-sm text-subtitle block mx-2 my-1">{industry}</span>
+                                                </Radio>
+                                          ))}
+                                    </Radio.Group>
+                              </Panel>
+
+                              {/* Company Country Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Countries</p>} key="regions">
+                                    {regions.map((region) => (
+                                          <div key={region.name} className="mb-4">
+                                                <p className="font-bold">{region.name}</p>
+                                                <Radio.Group
+                                                      onChange={(e) => onRegionChange(e.target.value)}
+                                                      className="flex flex-col gap-2"
+                                                >
+                                                      {region.countries.map((country) => (
+                                                            <Radio key={country} value={country}>
+                                                                  <span className="text-sm text-subtitle block mx-2 my-1">
+                                                                        {country}
+                                                                  </span>
+                                                            </Radio>
+                                                      ))}
+                                                </Radio.Group>
+                                          </div>
+                                    ))}
+                              </Panel>
+                        </Collapse>
+                  )}
             </div>
       );
 };

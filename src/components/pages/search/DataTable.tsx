@@ -1,17 +1,21 @@
 'use client';
 import { People, useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/features/data-management/dataManagementApi';
-import { Table, Button, Pagination, Tooltip } from 'antd';
+import { Table, Button, Pagination, Tooltip, message } from 'antd';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 // Define types for filter and table data
 type FilterType = 'peoples' | 'companies' | null;
 
-const DataTable: React.FC = () => {
+const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: FilterType) => void }> = ({
+      activeFilter,
+      setActiveFilter,
+}) => {
+      const router = useRouter();
+      const { user } = useAppSelector((state) => state.auth);
       const [currentPage, setCurrentPage] = useState(1);
-      const [activeFilter, setActiveFilter] = useState<FilterType>('peoples');
       const { searchText } = useAppSelector((state) => state.filter);
       const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery([
             { name: 'page', value: currentPage },
@@ -48,6 +52,14 @@ const DataTable: React.FC = () => {
             setCurrentPage(1);
       };
 
+      const handleViewPeopleDetails = (id: string) => {
+            if (!user) {
+                  message.warning('Please log in to view people details.');
+                  router.push('/login');
+            } else {
+                  router.push(`/peoples/${id}`);
+            }
+      };
       const columns =
             activeFilter === 'peoples'
                   ? [
@@ -90,7 +102,7 @@ const DataTable: React.FC = () => {
                                 title: 'Company Name',
                                 dataIndex: 'company_name',
                                 key: 'company_name',
-                                render: (companyName: string) => <p className=" capitalize">{companyName}</p>,
+                                render: (company_name: string) => <p className=" capitalize">{company_name}</p>,
                           },
                           {
                                 title: 'Title',
@@ -108,7 +120,7 @@ const DataTable: React.FC = () => {
                                 title: '',
                                 key: 'details',
                                 render: (record: any) => (
-                                      <Button href={`/peoples/${record._id}`} shape="round" type="primary">
+                                      <Button onClick={() => handleViewPeopleDetails(record._id)} shape="round" type="primary">
                                             Details
                                       </Button>
                                 ),
@@ -121,7 +133,7 @@ const DataTable: React.FC = () => {
                                 key: 'companyName',
                                 render: (companyName: string, record: any) => (
                                       <div>
-                                            <p>{companyName}</p>
+                                            <p className="font-semibold text-[17px]">{companyName}</p>
                                             <p className="text-subtitle">{record.website}</p>
                                       </div>
                                 ),
@@ -179,7 +191,6 @@ const DataTable: React.FC = () => {
                               Peoples: {peopleData?.meta?.total || 0}
                         </button>
 
-                        {/* Companies Filter Button */}
                         <button
                               onClick={() => handleFilterClick('companies')}
                               className={`${
@@ -190,7 +201,6 @@ const DataTable: React.FC = () => {
                         </button>
                   </div>
 
-                  {/* Dynamic Table */}
                   <Table
                         scroll={{ x: 600 }}
                         columns={columns}

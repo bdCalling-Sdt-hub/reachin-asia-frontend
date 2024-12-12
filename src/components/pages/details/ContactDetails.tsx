@@ -13,14 +13,14 @@ const ContactDetails: React.FC<{ people: People }> = ({ people }) => {
                                     <Image className="w-[32px]" alt="phone" src={Phone} height={500} width={500} />
                                     <div>
                                           <p className="text-gray-500">HQ Phone</p>
-                                          <p className="text-gray-800 font-medium">{people?.hqPhone}</p>
+                                          <p className="text-gray-800 font-medium">{people?.hq_phone || 'N/A'}</p>
                                     </div>
                               </div>
                               <div className="flex items-center gap-3">
                                     <Image className="w-[32px]" alt="phone" src={Phone} height={500} width={500} />
                                     <div>
                                           <p className="text-gray-500">Direct Line</p>
-                                          <p className="text-gray-800 font-medium">{people?.lineNumber}</p>
+                                          <p className="text-gray-800 font-medium">{people?.phone || 'N/A'}</p>
                                     </div>
                               </div>
                               <div className="flex items-center gap-3">

@@ -405,6 +405,7 @@ export const functions = [
 ];
 
 export const seniorityLevels = [
+      { value: '', label: 'All' },
       { value: 'C-Level', label: 'C-Level' },
       { value: 'VP-Level', label: 'VP-Level' },
       { value: 'Director', label: 'Director' },

@@ -1,7 +1,8 @@
-import { Collapse, Radio } from 'antd';
+import { Collapse, Radio, Slider } from 'antd';
 
 import { useAppDispatch } from '@/redux/hooks';
 import {
+      setSelectedAccuracyScore,
       setSelectedCompanyType,
       setSelectedEmployee,
       setSelectedEmployeeTotal,
@@ -9,11 +10,13 @@ import {
       setSelectedIndustry,
       setSelectedManageLevel,
       setSelectedOwnership,
+      setSelectedPrimaryIndustry,
       setSelectedRegion,
       setSelectedRevenueRange,
       setSelectedSales,
       setSelectedSeniority,
       setSelectedSource,
+      setSelectedSubIndustry,
 } from '@/redux/features/filter/filterSlice';
 import {
       companyTypes,
@@ -54,6 +57,8 @@ const Sidebar = ({ activeFilter }: Props) => {
       const onEmployeeChange = onChangeHandler(setSelectedEmployee);
       const onSalesChange = onChangeHandler(setSelectedSales);
       const onIndustryChange = onChangeHandler(setSelectedIndustry);
+      const onPrimaryIndustryChange = onChangeHandler(setSelectedPrimaryIndustry);
+      const onSubIndustryChange = onChangeHandler(setSelectedSubIndustry);
       const onRegionChange = onChangeHandler(setSelectedRegion);
       const onOwnershipChange = onChangeHandler(setSelectedOwnership);
       const onFunctionChange = onChangeHandler(setSelectedFunction);
@@ -61,12 +66,13 @@ const Sidebar = ({ activeFilter }: Props) => {
       const onEmployeeTotalChange = onChangeHandler(setSelectedEmployeeTotal);
       const onSourceChange = onChangeHandler(setSelectedSource);
       const onRevenueRangeChange = onChangeHandler(setSelectedRevenueRange);
+      const onAccuracyChange = onChangeHandler(setSelectedAccuracyScore);
 
       return (
             <div className="p-4">
                   {activeFilter === 'peoples' && (
                         <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
-                              <Panel header={<p className="text-[#6B6B6B]">Management Level</p>} key="management-level">
+                              {/* <Panel header={<p className="text-[#6B6B6B]">Management Level</p>} key="management-level">
                                     <Radio.Group onChange={(e) => onManageLevelChange(e.target.value)} className="flex flex-col">
                                           <Radio value="">
                                                 <span className="text-sm text-subtitle">All</span>
@@ -81,7 +87,7 @@ const Sidebar = ({ activeFilter }: Props) => {
                                                 <span className="text-sm text-subtitle">Director</span>
                                           </Radio>
                                     </Radio.Group>
-                              </Panel>
+                              </Panel> */}
 
                               {/* Functions Section */}
                               <Panel header={<p className="text-[#6B6B6B]">Functions</p>} key="functions">
@@ -115,7 +121,7 @@ const Sidebar = ({ activeFilter }: Props) => {
                               <Panel header={<p className="text-[#6B6B6B]">Primary Industries</p>} key="primary-industries">
                                     <Radio.Group
                                           className="flex flex-col gap-2"
-                                          onChange={(e) => onIndustryChange(e.target.value)}
+                                          onChange={(e) => onPrimaryIndustryChange(e.target.value)}
                                     >
                                           {primaryIndustries.map((industry) => (
                                                 <Radio key={industry.value} value={industry.value}>
@@ -127,7 +133,10 @@ const Sidebar = ({ activeFilter }: Props) => {
 
                               {/* Sub Industries Section */}
                               <Panel header={<p className="text-[#6B6B6B]">Sub Industries</p>} key="sub-industries">
-                                    <Radio.Group className="flex flex-col gap-2">
+                                    <Radio.Group
+                                          onChange={(e) => onSubIndustryChange(e.target.value)}
+                                          className="flex flex-col gap-2"
+                                    >
                                           {subIndustries.map((subIndustry) => (
                                                 <Radio key={subIndustry.value} value={subIndustry.value}>
                                                       <span className="text-sm text-subtitle">{subIndustry.label}</span>
@@ -177,8 +186,14 @@ const Sidebar = ({ activeFilter }: Props) => {
                         </Collapse>
                   )}
                   {activeFilter === 'companies' && (
-                        <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
+                        <Collapse defaultActiveKey={['accuracy-score']} ghost expandIconPosition="end">
                               {/* Company Type Section */}
+
+                              {/* Accuracy Score Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Accuracy Score</p>} key="accuracy-score">
+                                    <Slider min={0} max={100} onChange={(value) => onAccuracyChange(value.toString())} />
+                              </Panel>
+
                               <Panel header={<p className="text-[#6B6B6B]">Company Type</p>} key="company-type">
                                     <Radio.Group
                                           className="flex flex-col gap-2"

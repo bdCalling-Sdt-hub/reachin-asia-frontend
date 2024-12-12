@@ -3,7 +3,7 @@ import { People, useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/f
 import { Table, Button, Pagination, Tooltip, message } from 'antd';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
+import { setSearchText, setSelectedAccuracyScore, setSelectedCategory } from '@/redux/features/filter/filterSlice';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Define types for filter and table data
@@ -16,12 +16,38 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
       const router = useRouter();
       const { user } = useAppSelector((state) => state.auth);
       const [currentPage, setCurrentPage] = useState(1);
-      const { searchText } = useAppSelector((state) => state.filter);
+      const {
+            searchText,
+            selectedFunction,
+            selectedCategory,
+            selectedRevenueRange,
+            selectedManageLevel,
+            selectedSource,
+            selectedOwnership,
+            selectedIndustry,
+            selectedPrimaryIndustry,
+            selectedSubIndustry,
+            selectedRegion,
+            selectedEmployeeTotal,
+            selectedSales,
+            selectedCompanyType,
+            selectedEmployee,
+            selectedSeniority,
+            selectedAccuracyScore,
+      } = useAppSelector((state) => state.filter);
       const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery([
             { name: 'page', value: currentPage },
             { name: 'limit', value: 10 },
-
             { name: 'search', value: searchText },
+            { name: 'function', value: selectedFunction },
+            { name: 'seniority', value: selectedSeniority },
+            { name: 'country', value: selectedRegion },
+            { name: 'industry', value: selectedPrimaryIndustry },
+            { name: 'sub_industry', value: selectedSubIndustry },
+            { name: 'employee_count', value: selectedEmployeeTotal },
+            { name: 'accuracy_score', value: selectedAccuracyScore },
+            { name: 'revenue_range', value: selectedRevenueRange },
+            { name: 'source', value: selectedSource },
       ]);
 
       const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery([
@@ -31,6 +57,8 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
             },
             { name: 'limit', value: 10 },
             { name: 'search', value: searchText },
+            { name: 'company_type', value: selectedCompanyType },
+            { name: 'country', value: selectedRegion },
       ]);
       const dispatch = useAppDispatch();
       const searchParams = useSearchParams();

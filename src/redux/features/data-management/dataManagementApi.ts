@@ -124,7 +124,9 @@ export const dataManagementApi = baseApi.injectEndpoints({
                         const params = new URLSearchParams();
                         if (args) {
                               args.forEach((arg: TQueryParams) => {
-                                    params.append(arg.name, arg.value as string);
+                                    if (arg.value !== '') {
+                                          params.append(arg.name, arg.value as string);
+                                    }
                               });
                         }
                         return {
@@ -145,7 +147,9 @@ export const dataManagementApi = baseApi.injectEndpoints({
                         const params = new URLSearchParams();
                         if (args) {
                               args.forEach((arg: TQueryParams) => {
-                                    params.append(arg.name, arg.value as string);
+                                    if (arg.value !== '' && arg.value != '0') {
+                                          params.append(arg.name, arg.value as string);
+                                    }
                               });
                         }
                         return {

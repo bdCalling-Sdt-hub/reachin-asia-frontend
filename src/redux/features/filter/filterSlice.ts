@@ -8,6 +8,8 @@ interface FilterState {
       selectedEmployee: string;
       selectedSales: string;
       selectedIndustry: string;
+      selectedPrimaryIndustry: string;
+      selectedSubIndustry: string;
       selectedRegion: string;
       selectedOwnership: string;
       selectedFunction: string;
@@ -16,6 +18,7 @@ interface FilterState {
       selectedSource: string;
       selectedRevenueRange: string;
       selectedManageLevel: string;
+      selectedAccuracyScore: string | number;
 }
 
 const initialState: FilterState = {
@@ -25,6 +28,9 @@ const initialState: FilterState = {
       selectedEmployee: '',
       selectedSales: '',
       selectedIndustry: '',
+      selectedPrimaryIndustry: '',
+      selectedSubIndustry: '',
+
       selectedRegion: '',
       selectedOwnership: '',
       selectedFunction: '',
@@ -33,26 +39,36 @@ const initialState: FilterState = {
       selectedSource: '',
       selectedRevenueRange: '',
       selectedManageLevel: '',
+      selectedAccuracyScore: 0,
 };
 
 const filterSlice = createSlice({
       name: 'filter',
       initialState,
       reducers: {
+            // for homepage
             setSearchText: (state, action: PayloadAction<string>) => {
                   state.searchText = action.payload;
             },
+
+            //for homepage
             setSelectedCategory: (state, action: PayloadAction<string | null>) => {
                   state.selectedCategory = action.payload;
             },
+
+            // note: For company filter
             setSelectedCompanyType: (state, action: PayloadAction<string>) => {
                   state.selectedCompanyType = action.payload;
             },
+
             setSelectedEmployee: (state, action: PayloadAction<string>) => {
                   state.selectedEmployee = action.payload;
             },
             setSelectedSales: (state, action: PayloadAction<string>) => {
                   state.selectedSales = action.payload;
+            },
+            setSelectedOwnership: (state, action: PayloadAction<string>) => {
+                  state.selectedOwnership = action.payload;
             },
             setSelectedIndustry: (state, action: PayloadAction<string>) => {
                   state.selectedIndustry = action.payload;
@@ -60,14 +76,20 @@ const filterSlice = createSlice({
             setSelectedRegion: (state, action: PayloadAction<string>) => {
                   state.selectedRegion = action.payload;
             },
-            setSelectedOwnership: (state, action: PayloadAction<string>) => {
-                  state.selectedOwnership = action.payload;
-            },
+
+            // note: For people filter
             setSelectedFunction: (state, action: PayloadAction<string>) => {
                   state.selectedFunction = action.payload;
             },
             setSelectedSeniority: (state, action: PayloadAction<string>) => {
                   state.selectedSeniority = action.payload;
+            },
+
+            setSelectedPrimaryIndustry: (state, action: PayloadAction<string>) => {
+                  state.selectedPrimaryIndustry = action.payload;
+            },
+            setSelectedSubIndustry: (state, action: PayloadAction<string>) => {
+                  state.selectedSubIndustry = action.payload;
             },
             setSelectedEmployeeTotal: (state, action: PayloadAction<string>) => {
                   state.selectedEmployeeTotal = action.payload;
@@ -78,8 +100,12 @@ const filterSlice = createSlice({
             setSelectedRevenueRange: (state, action: PayloadAction<string>) => {
                   state.selectedRevenueRange = action.payload;
             },
+
             setSelectedManageLevel: (state, action: PayloadAction<string>) => {
                   state.selectedManageLevel = action.payload;
+            },
+            setSelectedAccuracyScore: (state, action: PayloadAction<string>) => {
+                  state.selectedAccuracyScore = action.payload;
             },
       },
 });
@@ -91,6 +117,7 @@ export const {
       setSelectedEmployee,
       setSelectedSales,
       setSelectedIndustry,
+      setSelectedPrimaryIndustry,
       setSelectedRegion,
       setSelectedOwnership,
       setSelectedFunction,
@@ -99,6 +126,8 @@ export const {
       setSelectedSource,
       setSelectedRevenueRange,
       setSelectedManageLevel,
+      setSelectedSubIndustry,
+      setSelectedAccuracyScore,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

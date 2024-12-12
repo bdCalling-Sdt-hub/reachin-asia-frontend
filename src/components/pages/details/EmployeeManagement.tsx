@@ -5,10 +5,10 @@ import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 const EmployeesManagementLevel = ({ people }: { people: People }) => {
       const data = [
             { name: 'Manager', value: parseInt(people?.manager || '0'), color: '#D9792F' },
-            { name: 'Director', value: parseInt(people?.directorCount || '0'), color: '#3D90E3' },
-            { name: 'C-Level', value: parseInt(people?.cLevel || '0'), color: '#FFB84A' },
-            { name: 'Non-Manager', value: parseInt(people?.nonManager || '0'), color: '#3CCF4E' },
-            { name: 'Staff', value: parseInt(people?.totalEmployee || '0'), color: '#E3722D' },
+            { name: 'Director', value: parseInt(people?.director || '0'), color: '#3D90E3' },
+            { name: 'C-Level', value: parseInt(people?.c_level || '0'), color: '#FFB84A' },
+            { name: 'Non-Manager', value: parseInt(people?.non_manager || '0'), color: '#3CCF4E' },
+            { name: 'Staff', value: parseInt(people?.employee_count || '0'), color: '#E3722D' },
       ];
 
       // Calculate total for percentage
@@ -26,15 +26,15 @@ const EmployeesManagementLevel = ({ people }: { people: People }) => {
 
                   <div className="bg-white rounded-lg p-6 shadow-md space-y-4">
                         <div className="text-subtitle">
-                              <p className="">{people?.openContact || '0'} Open Contacts</p>
+                              <p className="">{people?.open_contact || '0'} Open Contacts</p>
 
                               <div className="flex items-center justify-between">
-                                    <p>{people?.nonManager || '0'} Non - Manager</p>
-                                    <p>{people?.directorCount || '0'} Director </p>
+                                    <p>{people?.non_manager || '0'} Non - Manager</p>
+                                    <p>{people?.director || '0'} Director </p>
                               </div>
                               <div className="flex items-center justify-between">
                                     <p>{people?.manager || '0'} Manager</p>
-                                    <p>{people?.cLevel || '0'} C-Level </p>
+                                    <p>{people?.c_level || '0'} C-Level </p>
                               </div>
                         </div>
                         <div className="flex justify-center md:justify-start">

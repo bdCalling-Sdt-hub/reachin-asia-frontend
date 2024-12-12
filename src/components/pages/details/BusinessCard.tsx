@@ -12,12 +12,12 @@ import { useGetSinglePeopleQuery } from '@/redux/features/data-management/dataMa
 const BusinessCard = ({ id }: { id: string }) => {
       const { data: people } = useGetSinglePeopleQuery(id);
       const socialMediaData = [
-            { name: 'Instagram', icon: Instagram, url: people?.instagram || 'https://instagram.com' },
-            { name: 'Facebook', icon: Fb, url: people?.facebook || 'https://facebook.com' },
-            { name: 'YouTube', icon: YT, url: people?.youtube || 'https://youtube.com' },
-            { name: 'LinkedIn', icon: Linkedin, url: people?.linkedin || 'https://linkedin.com' },
-            { name: 'X', icon: X, url: people?.twitter || 'https://x.com' },
-      ];
+            { name: 'Instagram', icon: Instagram, url: people?.company_instagram ? people?.company_instagram : '' },
+            { name: 'Facebook', icon: Fb, url: people?.company_facebook ? people?.company_facebook : '' },
+            { name: 'YouTube', icon: YT, url: people?.company_youtube ? people?.company_youtube : '' },
+            { name: 'LinkedIn', icon: Linkedin, url: people?.company_linkedin ? people?.company_linkedin : '' },
+            { name: 'X', icon: X, url: people?.company_twitter ? people?.company_twitter : '' },
+      ].filter((item) => item.url !== '');
       return (
             <div className="bg-white container my-10 p-8 rounded-xl shadow">
                   <div className="grid grid-cols-12 ">
@@ -27,15 +27,19 @@ const BusinessCard = ({ id }: { id: string }) => {
                                     <Image src={Logo} alt="Company Logo" className="w-32 h-auto" />
 
                                     {/* Personal Information */}
-                                    <div className="text-start md:text-center">
-                                          <h2 className="text-xl font-semibold text-title ">{people?.name}</h2>
+                                    <div className="text-start">
+                                          <h2 className="text-xl font-semibold text-title ">
+                                                {people?.first_name + ' ' + people?.last_name}
+                                          </h2>
                                           <div className="flex items-center  gap-3">
                                                 <span>
                                                       <PiMapPinLineLight size={24} />
                                                 </span>
-                                                <p>{people?.location}</p>
+                                                <p>
+                                                      {people?.country}, {people?.city} , {people?.state}
+                                                </p>
                                           </div>
-                                          <p>{people?.designation}</p>
+                                          <p>{people?.title}</p>
                                     </div>
                               </div>
                         </div>
@@ -45,7 +49,7 @@ const BusinessCard = ({ id }: { id: string }) => {
                               <div className=" space-y-5">
                                     <div>
                                           <p className="text-subtitle">Company Name</p>
-                                          <p className="font-semibold text-[#4E4E4E]">{people?.companyName}</p>
+                                          <p className="font-semibold text-[#4E4E4E]">{people?.company_name}</p>
                                     </div>
 
                                     <div>
@@ -73,7 +77,7 @@ const BusinessCard = ({ id }: { id: string }) => {
                               <div className=" space-y-5">
                                     <div>
                                           <p className="text-subtitle">EXT. Employee Count</p>
-                                          <p className="font-semibold text-[#4E4E4E]">+{people?.totalEmployee}</p>
+                                          <p className="font-semibold text-[#4E4E4E]">+{people?.employee_count}</p>
                                     </div>
                                     <div>
                                           <p className="text-subtitle">EST. Revenue</p>

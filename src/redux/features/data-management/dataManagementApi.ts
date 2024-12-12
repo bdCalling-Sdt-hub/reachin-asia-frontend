@@ -96,6 +96,9 @@ export interface People {
       company_linkedin: string;
       company_facebook: string;
       company_twitter: string;
+      company_instagram: string;
+      company_youtube: string;
+
       ownership: string;
       business_model: string;
       company_country: string;

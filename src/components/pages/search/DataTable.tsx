@@ -60,7 +60,7 @@ const DataTable: React.FC = () => {
                                             <p className="font-semibold">
                                                   {record.first_name} {record.last_name}
                                             </p>
-                                            <p>{record.companyName}</p>
+                                            <p className="text-subtitle">{record.company_name}</p>
                                       </div>
                                 ),
                           },

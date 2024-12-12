@@ -33,7 +33,6 @@ import {
       sources,
       subIndustries,
 } from './constant';
-import { Dispatch, SetStateAction } from 'react';
 import { FilterType } from '@/app/(withCommonLayout)/search/page';
 
 const { Panel } = Collapse;
@@ -52,7 +51,7 @@ const Sidebar = ({ activeFilter }: Props) => {
       };
 
       // Note: onXXXChange is a function that returns a function
-      const onManageLevelChange = onChangeHandler(setSelectedManageLevel);
+      // const onManageLevelChange = onChangeHandler(setSelectedManageLevel);
       const onCompanyTypeChange = onChangeHandler(setSelectedCompanyType);
       const onEmployeeChange = onChangeHandler(setSelectedEmployee);
       const onSalesChange = onChangeHandler(setSelectedSales);
@@ -69,7 +68,7 @@ const Sidebar = ({ activeFilter }: Props) => {
       const onAccuracyChange = onChangeHandler(setSelectedAccuracyScore);
 
       return (
-            <div className="p-4">
+            <div className="p-2">
                   {activeFilter === 'peoples' && (
                         <Collapse defaultActiveKey={[]} ghost expandIconPosition="end">
                               {/* <Panel header={<p className="text-[#6B6B6B]">Management Level</p>} key="management-level">

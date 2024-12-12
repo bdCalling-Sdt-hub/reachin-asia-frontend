@@ -1,4 +1,5 @@
 export const companyTypes = [
+      { value: '', label: 'All' },
       { value: 'Partnership Independent', label: 'Partnership Independent' },
       { value: 'Partnership Parent Headquarters', label: 'Partnership Parent Headquarters' },
       { value: 'Private Independent', label: 'Private Independent' },
@@ -10,6 +11,7 @@ export const companyTypes = [
 ];
 
 export const employeeRanges = [
+      { value: '', label: 'All' },
       { value: '1-50', label: '1-50' },
       { value: '51-100', label: '51-100' },
       { value: '101-250', label: '101-250' },
@@ -19,12 +21,14 @@ export const employeeRanges = [
 ];
 
 export const salesRanges = [
+      { value: '', label: 'All' },
       { value: '0-10M', label: '0-10M' },
       { value: '10M-50M', label: '10M-50M' },
       { value: '50M-100M', label: '50M-100M' },
       { value: '>100M', label: '>100M' },
 ];
 export const ownershipTypes = [
+      { value: '', label: 'All' },
       { value: 'Non-Corporates', label: 'Non-Corporates' },
       { value: 'Nonprofit', label: 'Nonprofit' },
       { value: 'Partnership', label: 'Partnership' },
@@ -393,6 +397,7 @@ export const regions = [
 ];
 
 export const functions = [
+      { value: '', label: 'All' },
       { value: 'Admin', label: 'Admin' },
       { value: 'Finance', label: 'Finance' },
       { value: 'General', label: 'General' },
@@ -413,6 +418,7 @@ export const seniorityLevels = [
       { value: 'Non-Manager', label: 'Non-Manager' },
 ];
 export const primaryIndustries = [
+      { value: '', label: 'All' },
       { value: 'Agriculture', label: 'Agriculture' },
       { value: 'Business Services', label: 'Business Services' },
       { value: 'Construction', label: 'Construction' },
@@ -439,6 +445,7 @@ export const primaryIndustries = [
 ];
 
 export const subIndustries = [
+      { value: '', label: 'All' },
       { value: 'Animals & Livestock', label: 'Animals & Livestock' },
       { value: 'Crops', label: 'Crops' },
       { value: 'Forestry', label: 'Forestry' },
@@ -532,6 +539,7 @@ export const subIndustries = [
 ];
 
 export const employeeTotals = [
+      { value: '', label: 'All' },
       { value: '1-50', label: '1-50' },
       { value: '51-200', label: '51-200' },
       { value: '201-500', label: '201-500' },
@@ -542,12 +550,14 @@ export const employeeTotals = [
 ];
 
 export const sources = [
+      { value: '', label: 'All' },
       { value: 'Zoominfo', label: 'Zoominfo' },
       { value: 'LinkedIn', label: 'LinkedIn' },
       { value: 'HKTDC', label: 'HKTDC' },
       { value: 'Reachin', label: 'Reachin' },
 ];
 export const revenueRanges = [
+      { value: '', label: 'All' },
       { value: '$1 bil. - $5 bil.', label: '$1 bil. - $5 bil.' },
       { value: '$1 mil. - $5 mil.', label: '$1 mil. - $5 mil.' },
       { value: '$10 mil. - $25 mil.', label: '$10 mil. - $25 mil.' },

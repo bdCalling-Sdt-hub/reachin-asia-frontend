@@ -3,7 +3,7 @@ import { People, useGetAllCompaniesQuery, useGetAllPeopleQuery } from '@/redux/f
 import { Table, Button, Pagination, Tooltip, message } from 'antd';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { setSearchText, setSelectedAccuracyScore, setSelectedCategory } from '@/redux/features/filter/filterSlice';
+import { setSearchText, setSelectedCategory } from '@/redux/features/filter/filterSlice';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 // Define types for filter and table data
@@ -35,6 +35,8 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
             selectedSeniority,
             selectedAccuracyScore,
       } = useAppSelector((state) => state.filter);
+
+      // Todo: This is people data filters
       const { data: peopleData, isLoading: isPeopleLoading } = useGetAllPeopleQuery([
             { name: 'page', value: currentPage },
             { name: 'limit', value: 10 },
@@ -50,6 +52,7 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
             { name: 'source', value: selectedSource },
       ]);
 
+      // Todo: This is companies data filters
       const { data: companiesData, isLoading: isCompaniesLoading } = useGetAllCompaniesQuery([
             {
                   name: 'page',

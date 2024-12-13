@@ -19,9 +19,7 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
       const {
             searchText,
             selectedFunction,
-            selectedCategory,
             selectedRevenueRange,
-            selectedManageLevel,
             selectedSource,
             selectedOwnership,
             selectedIndustry,
@@ -29,9 +27,9 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
             selectedSubIndustry,
             selectedRegion,
             selectedEmployeeTotal,
+            selectedEmployee,
             selectedSales,
             selectedCompanyType,
-            selectedEmployee,
             selectedSeniority,
             selectedAccuracyScore,
       } = useAppSelector((state) => state.filter);
@@ -61,6 +59,10 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
             { name: 'limit', value: 10 },
             { name: 'search', value: searchText },
             { name: 'company_type', value: selectedCompanyType },
+            { name: 'employee_total', value: selectedEmployee },
+            { name: 'sales', value: selectedSales },
+            { name: 'ownership', value: selectedOwnership },
+            { name: 'industry', value: selectedIndustry },
             { name: 'country', value: selectedRegion },
       ]);
       const dispatch = useAppDispatch();

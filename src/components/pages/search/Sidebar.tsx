@@ -248,8 +248,10 @@ const Sidebar = ({ activeFilter }: Props) => {
                                           onChange={(e) => onIndustryChange(e.target.value)}
                                     >
                                           {industries.map((industry) => (
-                                                <Radio key={industry} value={industry}>
-                                                      <span className="text-sm text-subtitle block mx-2 my-1">{industry}</span>
+                                                <Radio key={industry.value} value={industry.value}>
+                                                      <span className="text-sm text-subtitle block mx-2 my-1">
+                                                            {industry.label}
+                                                      </span>
                                                 </Radio>
                                           ))}
                                     </Radio.Group>

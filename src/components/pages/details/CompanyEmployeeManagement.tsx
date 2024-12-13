@@ -11,7 +11,7 @@ const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
             { name: 'Open Contact', value: parseInt(company?.total_open_contact || '0'), color: '#FFB84A' },
             {
                   name: 'Non-Manager',
-                  value: parseInt(company?.non_manager || '0'),
+                  value: parseInt(company?.total_non_manager || '0'),
 
                   color: '#3CCF4E',
             },
@@ -67,6 +67,9 @@ const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
                               <div className="flex items-center justify-between">
                                     <p>{company?.total_manager} Manager</p>
                                     <p>{company?.total_c_level} C-Level </p>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                    <p>{company?.total_non_manager} Non-Manager </p>
                               </div>
                         </div>
                   </div>

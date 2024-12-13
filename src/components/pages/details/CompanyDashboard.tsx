@@ -13,10 +13,10 @@ const CompanyDashboard = ({ id }: Props) => {
       return (
             <div className="container">
                   <div className="grid grid-cols-12 gap-6">
-                        <div className="col-span-12 md:col-span-4 space-y-6">
+                        <div className="col-span-12 md:col-span-5 space-y-6">
                               <NewsFeed />
                         </div>
-                        <div className="col-span-12 md:col-span-8 space-y-6">
+                        <div className="col-span-12 md:col-span-7 space-y-6">
                               <CompanyOverview overview={company?.business_description as string} />
                               <CompanyEmployeeManagement company={company!} />
                         </div>

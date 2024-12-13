@@ -56,6 +56,8 @@ export interface Company {
       corporate_decision_hq: string;
       corporate_headquarters: string;
       corporate_subsidary: string;
+      non_manager: string;
+      total_staff: string;
       corporate_branch: string;
       corporate_is_decision_hq: string;
       corporate_is_headquarter: string;
@@ -71,6 +73,9 @@ export interface Company {
       corporate_duns_number: string;
       corporate_hoovers_contacts: string;
       corporate_direct_marketing_status: string;
+      total_manager: string;
+      total_c_level: string;
+      total_open_contact: string;
       image: string;
       __v: number;
       createdAt: string;

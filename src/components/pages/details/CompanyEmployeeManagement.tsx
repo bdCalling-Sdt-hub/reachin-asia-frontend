@@ -5,20 +5,21 @@ import { Tooltip } from 'antd';
 import { Cell, Pie, PieChart } from 'recharts';
 
 const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
-      // TODO: need dynamic data
-      console.log('company', company);
       const data = [
-            { name: 'Manager', value: 200, color: '#D9792F' },
-            { name: 'Director', value: 100, color: '#3D90E3' },
-            { name: 'C-Level', value: 50, color: '#FFB84A' },
-            { name: 'Non-Manager', value: 400, color: '#3CCF4E' },
-            { name: 'Staff', value: 800, color: '#E3722D' },
+            { name: 'Manager', value: parseInt(company?.total_manager || '0'), color: '#D9792F' },
+            { name: 'C-Level', value: parseInt(company?.total_c_level || '0'), color: '#3D90E3' },
+            { name: 'Open Contact', value: parseInt(company?.total_open_contact || '0'), color: '#FFB84A' },
+            {
+                  name: 'Non-Manager',
+                  value: parseInt(company?.non_manager || '0'),
+
+                  color: '#3CCF4E',
+            },
+            { name: 'Staff', value: parseInt(company?.total_staff || '0'), color: '#E3722D' },
       ];
 
-      // Calculate total for percentage
       const total = data.reduce((acc, item) => acc + item.value, 0);
 
-      // Calculate percentages
       const dataWithPercentages = data.map((item) => ({
             ...item,
             percentage: total > 0 ? Math.round((item.value / total) * 100) : 0,
@@ -28,8 +29,8 @@ const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
             <div>
                   <h3 className="text-lg my-2 font-semibold">Employees By Management Level</h3>
 
-                  <div className="bg-white grid grid-cols-2 rounded-lg p-6 shadow-md space-y-4">
-                        <div className="flex justify-center md:justify-start">
+                  <div className="bg-white grid md:grid-cols-2 items-center rounded-lg p-6 shadow-md space-y-4">
+                        <div className="flex justify-center md:justify-start gap-4 items-center">
                               <PieChart width={200} height={200}>
                                     <Pie
                                           data={dataWithPercentages}
@@ -60,12 +61,12 @@ const CompanyEmployeeManagement = ({ company }: { company: Company }) => {
                         </div>
                         <div className="text-subtitle w-full">
                               <div className="flex items-center justify-between">
-                                    <p>400 Non - Manager</p>
-                                    <p>100 Director </p>
+                                    <p>{company?.employee_total} Total Employee </p>
+                                    <p>{company?.total_open_contact} Open Contact </p>
                               </div>
                               <div className="flex items-center justify-between">
-                                    <p>200 Manager</p>
-                                    <p>50 C-Level </p>
+                                    <p>{company?.total_manager} Manager</p>
+                                    <p>{company?.total_c_level} C-Level </p>
                               </div>
                         </div>
                   </div>

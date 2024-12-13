@@ -87,7 +87,10 @@ const Sidebar = ({ activeFilter }: Props) => {
                                           </Radio>
                                     </Radio.Group>
                               </Panel> */}
-
+                              {/* Accuracy Score Section */}
+                              <Panel header={<p className="text-[#6B6B6B]">Accuracy Score</p>} key="accuracy-score">
+                                    <Slider min={0} max={100} onChange={(value) => onAccuracyChange(value.toString())} />
+                              </Panel>
                               {/* Functions Section */}
                               <Panel header={<p className="text-[#6B6B6B]">Functions</p>} key="functions">
                                     <Radio.Group
@@ -187,11 +190,6 @@ const Sidebar = ({ activeFilter }: Props) => {
                   {activeFilter === 'companies' && (
                         <Collapse defaultActiveKey={['accuracy-score']} ghost expandIconPosition="end">
                               {/* Company Type Section */}
-
-                              {/* Accuracy Score Section */}
-                              <Panel header={<p className="text-[#6B6B6B]">Accuracy Score</p>} key="accuracy-score">
-                                    <Slider min={0} max={100} onChange={(value) => onAccuracyChange(value.toString())} />
-                              </Panel>
 
                               <Panel header={<p className="text-[#6B6B6B]">Company Type</p>} key="company-type">
                                     <Radio.Group

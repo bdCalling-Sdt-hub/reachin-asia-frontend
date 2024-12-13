@@ -23,40 +23,59 @@ export type PeopleResponse = {
       };
 };
 
-export type Company = {
+export interface Company {
       _id: string;
-      companyName: string;
-      website: string;
+      company_name: string;
+      company_link: string;
       phone: string;
-      companyType: string;
-      employeeTotal: string;
-      sales: string;
+      company_type: string;
+      employee_total: string;
+      employees: string;
+      sales: number;
       district: string;
       industry: string;
-      dunsNumber: string;
       country: string;
-      trade: string;
-      instagram?: string;
-      facebook?: string;
-      twitter?: string;
-      linkedin?: string;
-      youtube?: string;
+      twitter: string;
+      facebook: string;
+      instagram: string;
+      linkedin: string;
+      youtube: string;
+      location: string;
       address: string;
       headquarters: string;
-      decisionHq: string;
-      description: string;
+      decision_hq: string;
+      corporate_linkage: string;
+      business_description: string;
       contact: string;
       title: string;
-      corporateFamily: string;
+      company_for_contact: string;
+      corporate_family: string;
       tier: string;
       parent: string;
-      branch: string;
-      city: string;
-      state: string;
-      region: string;
-
+      corporate_company_name: string;
+      corporate_decision_hq: string;
+      corporate_headquarters: string;
+      corporate_subsidary: string;
+      corporate_branch: string;
+      corporate_is_decision_hq: string;
+      corporate_is_headquarter: string;
+      corporate_ownership_type: string;
+      corporate_entity_type: string;
+      corporate_city: string;
+      corporate_state: string;
+      corporate_country: string;
+      employees_single: string;
+      corporate_sales: string;
+      corporate_hoovers_industry: string;
+      corporate_key_id: string;
+      corporate_duns_number: string;
+      corporate_hoovers_contacts: string;
+      corporate_direct_marketing_status: string;
+      image: string;
+      __v: number;
       createdAt: string;
-};
+      updatedAt: string;
+}
 
 export interface People {
       _id: string;

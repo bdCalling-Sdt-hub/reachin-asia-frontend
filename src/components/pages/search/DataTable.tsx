@@ -160,12 +160,12 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
                   : [
                           {
                                 title: 'Company Name',
-                                dataIndex: 'companyName',
-                                key: 'companyName',
-                                render: (companyName: string, record: any) => (
+                                dataIndex: 'company_name',
+                                key: 'company_name',
+                                render: (company_name: string, record: any) => (
                                       <div>
-                                            <p className="font-semibold text-[17px]">{companyName}</p>
-                                            <p className="text-subtitle">{record.website}</p>
+                                            <p className="font-semibold text-[17px]">{company_name}</p>
+                                            <p className="text-subtitle">{record.company_link}</p>
                                       </div>
                                 ),
                           },
@@ -181,8 +181,8 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
                           },
                           {
                                 title: 'Employees',
-                                dataIndex: 'employeeTotal',
-                                key: 'employeeTotal',
+                                dataIndex: 'employee_total',
+                                key: 'employee_total',
                           },
                           {
                                 title: 'Revenue (USA)',

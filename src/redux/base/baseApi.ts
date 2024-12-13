@@ -5,11 +5,15 @@ export const baseApi = createApi({
       reducerPath: 'baseApi',
       baseQuery: fetchBaseQuery({
             baseUrl: 'http://192.168.10.102:6001/api/v1',
-            credentials: 'include',
-            prepareHeaders: (header, { getState }) => {
+            // credentials: 'include',
+            prepareHeaders: (headers, { getState, endpoint }) => {
                   const { token } = (getState() as RootState).auth;
                   if (token) {
-                        header.set('Authorization', `Bearer ${token}`);
+                        if (endpoint === 'getSingleCompany') {
+                              headers.set('Authorization', token);
+                        } else {
+                              headers.set('Authorization', `Bearer ${token}`);
+                        }
                   }
             },
       }),

@@ -37,7 +37,7 @@ const Profile = () => {
       }
 
       return (
-            <div className="container">
+            <div className="container my-10">
                   <div className="py-10">
                         <h1 className="text-4xl font-semibold ">User Details</h1>
                   </div>

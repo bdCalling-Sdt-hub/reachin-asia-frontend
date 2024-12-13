@@ -8,6 +8,7 @@ import Linkedin from '@/assets/images/details/social/linkedin.png';
 import Instagram from '@/assets/images/details/social/insta.png';
 import YT from '@/assets/images/details/social/yt.png';
 import { useGetSinglePeopleQuery } from '@/redux/features/data-management/dataManagementApi';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 const BusinessCard = ({ id }: { id: string }) => {
       const { data: people } = useGetSinglePeopleQuery(id);
@@ -24,7 +25,13 @@ const BusinessCard = ({ id }: { id: string }) => {
                         <div className="col-span-12 md:col-span-5 ">
                               {/* Logo */}
                               <div className="flex flex-col md:flex-row items-center gap-4 text-subtitle h-full">
-                                    <Image src={Logo} alt="Company Logo" className="w-32 h-auto" />
+                                    <Image
+                                          height={100}
+                                          width={100}
+                                          src={getImageUrl(people?.image)}
+                                          alt="Company Logo"
+                                          className="w-32 h-auto"
+                                    />
 
                                     {/* Personal Information */}
                                     <div className="text-start">

@@ -17,7 +17,7 @@ const CompanyDashboard = ({ id }: Props) => {
                               <NewsFeed />
                         </div>
                         <div className="col-span-12 md:col-span-8 space-y-6">
-                              <CompanyOverview overview={company?.description as string} />
+                              <CompanyOverview overview={company?.business_description as string} />
                               <CompanyEmployeeManagement company={company!} />
                         </div>
                   </div>

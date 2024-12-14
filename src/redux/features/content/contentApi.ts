@@ -70,7 +70,7 @@ const contentApi = baseApi.injectEndpoints({
                         return { url: '/faq', method: 'GET', params };
                   },
                   transformResponse: (response: any) => {
-                        return { faqs: response.data.faqs, meta: response.data.meta };
+                        return response.data;
                   },
             }),
             getTerms: build.query({

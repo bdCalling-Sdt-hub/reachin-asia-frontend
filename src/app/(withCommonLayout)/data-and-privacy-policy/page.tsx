@@ -4,7 +4,7 @@ import { useGetPrivacyQuery } from '@/redux/features/content/contentApi';
 const PrivacyPolicyPage = () => {
       const { data: privacy } = useGetPrivacyQuery([]);
       return (
-            <div className="">
+            <div className="min-h-[80vh]">
                   <PolicyHeader title="Data & " subTitle="Privacy Policy" />
                   <div className="bg-white p-10">
                         <div className="container">

@@ -5,7 +5,7 @@ const LicenseTerms = () => {
       const { data: termsAndCondition } = useGetTermsQuery([]);
 
       return (
-            <div className="">
+            <div className="min-h-[80vh]">
                   <PolicyHeader title="License " subTitle="Terms & Conditions" />
                   <div className="bg-white p-10">
                         <div className="container">

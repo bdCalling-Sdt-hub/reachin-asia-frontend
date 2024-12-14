@@ -8,7 +8,6 @@ import {
       setSelectedEmployeeTotal,
       setSelectedFunction,
       setSelectedIndustry,
-      setSelectedManageLevel,
       setSelectedOwnership,
       setSelectedPrimaryIndustry,
       setSelectedRegion,

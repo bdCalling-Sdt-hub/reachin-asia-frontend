@@ -9,7 +9,9 @@ const FaqCollapse = () => {
       const { token } = theme.useToken();
       const [currentPage, setCurrentPage] = useState(1); // Current page state
       const { data: faqsData = {}, isLoading } = useGetFaqsQuery([{ name: 'page', value: currentPage }]);
-      const { faqs = [], meta } = faqsData;
+
+      const faqs = faqsData?.faqs || [];
+      const meta = faqsData?.meta;
 
       // Custom panel style
       const panelStyle = {

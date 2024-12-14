@@ -1,7 +1,6 @@
 // components/NewsFeed.tsx
 
 import NewsImage from '@/assets/images/details/news2.png';
-import { useGetNewsQuery } from '@/redux/features/news/newsApi';
 import { Button } from 'antd';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { baseReducer } from '@/redux/base/baseReducer';
 import { baseApi } from '@/redux/base/baseApi';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, persistStore } from 'redux-persist';
+import { scrapingDogApi } from './base/scrappingDogApi';
 
 export const store = configureStore({
       reducer: baseReducer,
@@ -10,7 +11,7 @@ export const store = configureStore({
                   serializableCheck: {
                         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
                   },
-            }).concat(baseApi.middleware),
+            }).concat(baseApi.middleware, scrapingDogApi.middleware),
 });
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;

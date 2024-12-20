@@ -1,45 +1,34 @@
-// components/NewsFeed.tsx
+'use client';
 
 import NewsImage from '@/assets/images/details/news2.png';
+import { TScrapingDog, useFetchGoogleResultsQuery } from '@/redux/base/scrappingDogApi';
 import { Button } from 'antd';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-const newsItems = [
-      { title: 'Alibaba-backed Turkish ecommerce platform launches LLM', date: '21 March, 2024' },
-      { title: 'Alibaba claims its new AI translation tool outperforms Google and ChatGPT', date: '21 March, 2024' },
-      { title: 'Alibaba opens walled garden to rival JD.com’s logistics services', date: '21 March, 2024' },
-      { title: 'Alibaba Gears Up for 2024 11.11 with Over $4 Billion in Consumer...', date: '21 March, 2024' },
-      { title: 'Alibaba’s international arm says its new AI translation tool beats ...', date: '21 March, 2024' },
-];
+import { useState } from 'react';
 
-const NewsFeed: React.FC = () => {
-      //       const [news, setNews] = useState([]);
-      //       const [isLoading, setIsLoading] = useState(true);
+const NewsFeed = ({ query }: { query: string }) => {
+      const { data, error, isLoading } = useFetchGoogleResultsQuery({
+            query: query || 'Alibaba',
+      });
 
-      //       useEffect(() => {
-      //             const fetchNews = async () => {
-      //                   const response = await fetch(`${process.env.NEXT_PUBLIC_NEWS_API}`);
-      //                   const data = await response.json();
-      //                   setNews(data);
-      //                   setIsLoading(false);
-      //             };
+      const [showAll, setShowAll] = useState(false);
 
-      //             fetchNews();
-      //       }, []);
-      //       console.log(news);
-      // Todo: Free api doesnt work
+      if (isLoading) return <p>Loading...</p>;
+      if (error) return <p>Error loading data.</p>;
+
+      const displayedData = showAll ? data : data?.slice(0, 6);
 
       return (
             <div className="">
                   <h3 className="text-lg font-semibold my-2">News Feed</h3>
                   <div className="space-y-5">
-                        {newsItems.map((item, index) => (
+                        {displayedData?.map((item: TScrapingDog, index: number) => (
                               <div key={index} className="flex gap-3 bg-white p-4 rounded-lg shadow-md">
-                                    <div className="w-[72pz] h-[72pz] overflow-hidden rounded-xl">
+                                    <div className="w-[72px] h-[72px] overflow-hidden rounded-xl">
                                           <Image
                                                 className="w-full h-full object-cover"
                                                 src={NewsImage}
-                                                alt=""
+                                                alt="News Thumbnail"
                                                 width={110}
                                                 height={110}
                                           />
@@ -47,8 +36,7 @@ const NewsFeed: React.FC = () => {
                                     <div className="flex-1">
                                           <p className="text-gray-800 font-medium">{item.title}</p>
                                           <div className="flex items-center justify-between">
-                                                <p className="text-gray-500 text-sm">{item.date}</p>
-                                                <a href="#" className="text-primary underline text-sm">
+                                                <a href={item.link} className="text-primary underline text-sm">
                                                       Read more
                                                 </a>
                                           </div>
@@ -56,19 +44,22 @@ const NewsFeed: React.FC = () => {
                               </div>
                         ))}
                   </div>
-                  <div className="flex justify-end">
-                        <Button
-                              style={{
-                                    height: 42,
-                                    width: 'fit-content',
-                                    margin: '20px 0',
-                              }}
-                              shape="round"
-                              type="primary"
-                        >
-                              See All News
-                        </Button>
-                  </div>
+                  {data && data.length > 6 && (
+                        <div className="flex justify-end">
+                              <Button
+                                    style={{
+                                          height: 42,
+                                          width: 'fit-content',
+                                          margin: '20px 0',
+                                    }}
+                                    shape="round"
+                                    type="primary"
+                                    onClick={() => setShowAll(!showAll)}
+                              >
+                                    {showAll ? 'Show Less' : 'See All News'}
+                              </Button>
+                        </div>
+                  )}
             </div>
       );
 };

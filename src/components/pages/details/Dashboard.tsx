@@ -29,7 +29,7 @@ const Dashboard = ({ id }: Props) => {
 
                         {/* Right Column */}
                         <div className="space-y-6">
-                              <NewsFeed query={people?.first_name + ' ' + people?.last_name!} />
+                              <NewsFeed query={people?.company_name!} />
                         </div>
                   </div>
             </div>

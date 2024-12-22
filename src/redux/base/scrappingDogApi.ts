@@ -1,15 +1,16 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export interface TScrapingDog {
       title: string;
-      displayed_link: string;
       snippet: string;
-      link: string;
-      rank: number;
+      source: string;
+      lastUpdated: string;
+      url: string;
+      imgSrc: string;
 }
 
 export const scrapingDogApi = createApi({
       reducerPath: 'scrapingDogApi',
-      baseQuery: fetchBaseQuery({ baseUrl: 'https://api.scrapingdog.com/google/' }),
+      baseQuery: fetchBaseQuery({ baseUrl: 'https://api.scrapingdog.com/google_news/' }),
       endpoints: (builder) => ({
             fetchGoogleResults: builder.query({
                   query: ({ query, results = 10, country = 'us', page = 0, advance_search = 'false' }) => ({
@@ -23,7 +24,7 @@ export const scrapingDogApi = createApi({
                               advance_search,
                         },
                   }),
-                  transformResponse: (response: any) => response.organic_results,
+                  transformResponse: (response: any) => response.news_results,
             }),
       }),
 });

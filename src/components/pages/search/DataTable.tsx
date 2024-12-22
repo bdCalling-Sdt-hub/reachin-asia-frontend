@@ -212,7 +212,7 @@ const DataTable: React.FC<{ activeFilter: FilterType; setActiveFilter: (filter: 
       };
 
       return (
-            <div>
+            <div className="min-h-[80vh]">
                   <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 py-3">
                         {/* People Filter Button */}
                         <button

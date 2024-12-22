@@ -1,6 +1,5 @@
 'use client';
 
-import NewsImage from '@/assets/images/details/news2.png';
 import { TScrapingDog, useFetchGoogleResultsQuery } from '@/redux/base/scrappingDogApi';
 import { Button } from 'antd';
 import Image from 'next/image';
@@ -27,7 +26,7 @@ const NewsFeed = ({ query }: { query: string }) => {
                                     <div className="w-[72px] h-[72px] overflow-hidden rounded-xl">
                                           <Image
                                                 className="w-full h-full object-cover"
-                                                src={NewsImage}
+                                                src={item.imgSrc}
                                                 alt="News Thumbnail"
                                                 width={110}
                                                 height={110}
@@ -36,7 +35,7 @@ const NewsFeed = ({ query }: { query: string }) => {
                                     <div className="flex-1">
                                           <p className="text-gray-800 font-medium">{item.title}</p>
                                           <div className="flex items-center justify-between">
-                                                <a href={item.link} className="text-primary underline text-sm">
+                                                <a href={item.url} className="text-primary underline text-sm">
                                                       Read more
                                                 </a>
                                           </div>

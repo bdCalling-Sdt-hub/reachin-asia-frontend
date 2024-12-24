@@ -3,7 +3,7 @@ import { RootState } from '@/redux/store';
 import { logoutUser } from '../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
-      baseUrl: 'http://192.168.10.102:6001/api/v1',
+      baseUrl: 'http://178.16.138.188:5000/api/v1',
       // credentials: 'include',
       prepareHeaders: (headers, { getState, endpoint }) => {
             const { token } = (getState() as RootState).auth;
@@ -35,4 +35,4 @@ export const baseApi = createApi({
       tagTypes: ['Auth', 'User', 'Data'],
 });
 
-export const imageUrl = 'http://192.168.10.102:6001';
+export const imageUrl = 'http://178.16.138.188:5000';
